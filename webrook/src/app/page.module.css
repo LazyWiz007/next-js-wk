@@ -1,0 +1,13 @@
+.main {
+  min-height: 100vh;
+  padding-top: var(--header-height);
+}
+
+.hero {
+  padding: 120px 24px;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

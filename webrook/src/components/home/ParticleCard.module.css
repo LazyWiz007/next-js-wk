@@ -1,0 +1,85 @@
+.card {
+    position: relative;
+    width: 100%;
+    min-height: 480px;
+    /* Transparent background so global particles show through/around */
+    background: transparent;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    /* No overflow hidden, so we don't clip anything unexpectedly */
+}
+
+.content {
+    position: relative;
+    z-index: 2;
+    /* Sit above the global canvas */
+    padding: 32px;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    pointer-events: none;
+    /* Let hovers pass through to card container if needed */
+}
+
+.card:hover .content {
+    /* Optional: Slight lift on content if desired, but user wants particles to do the work */
+}
+
+.category {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: #5f6368;
+    background: rgba(255, 255, 255, 0.8);
+    /* Slight background for readability over particles */
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-family: var(--font-plus-jakarta);
+    backdrop-filter: blur(4px);
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 500;
+    color: #202124;
+    line-height: 1.2;
+    font-family: var(--font-plus-jakarta);
+    letter-spacing: -0.02em;
+}
+
+.outcome {
+    font-size: 18px;
+    color: #5f6368;
+    line-height: 1.6;
+    transition: opacity 0.3s ease;
+    font-family: var(--font-plus-jakarta);
+    max-width: 280px;
+}
+
+.action {
+    margin-top: 24px;
+    background: #202124;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px 32px;
+    border-radius: 30px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-family: var(--font-plus-jakarta);
+    pointer-events: auto;
+    /* Enable clicking */
+}
+
+.actionVisible {
+    opacity: 1;
+    transform: translateY(0);
+}

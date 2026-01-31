@@ -1,0 +1,36 @@
+.footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    margin-top: auto;
+    /* Push to bottom if content is short */
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copyright {
+    font-family: var(--font-plus-jakarta);
+    font-size: 14px;
+    color: #5f6368;
+    /* Google Grey 700 */
+}
+
+.footerList {
+    display: flex;
+    list-style: none;
+    gap: 24px;
+}
+
+.footerLink {
+    font-family: var(--font-plus-jakarta);
+    font-size: 14px;
+    color: #5f6368;
+    transition: color 0.2s;
+}
+
+.footerLink:hover {
+    color: var(--foreground);
+}

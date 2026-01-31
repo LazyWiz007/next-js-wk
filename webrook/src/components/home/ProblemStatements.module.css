@@ -1,0 +1,143 @@
+.section {
+    padding: 120px 0;
+    background: #050505;
+    color: #fff;
+    overflow: hidden;
+}
+
+.split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+}
+
+.label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #9aa0a6;
+    margin-bottom: 16px;
+    font-family: var(--font-plus-jakarta);
+}
+
+.heading {
+    font-size: 56px;
+    font-weight: 600;
+    margin-bottom: 64px;
+    line-height: 1.1;
+    font-family: var(--font-plus-jakarta);
+}
+
+.problemList {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.item {
+    padding: 32px;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.item:hover,
+.active {
+    border-left-color: #fff;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
+}
+
+.itemTitle {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-family: var(--font-plus-jakarta);
+}
+
+.itemDesc {
+    font-size: 16px;
+    color: #9aa0a6;
+    line-height: 1.5;
+    font-family: var(--font-plus-jakarta);
+}
+
+.visualSide {
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* On mobile, this might be hidden or smaller */
+}
+
+.visualShape {
+    width: 300px;
+    height: 300px;
+    background: #1a73e8;
+    filter: blur(80px);
+    opacity: 0.3;
+    transition: all 0.5s ease;
+    border-radius: 50%;
+}
+
+.shape-1 {
+    background: #ea4335;
+    transform: scale(1.2);
+}
+
+.shape-2 {
+    background: #fbbc04;
+    transform: rotate(45deg);
+    border-radius: 20%;
+}
+
+.shape-3 {
+    background: #34a853;
+    transform: scale(0.8);
+    border-radius: 0;
+}
+
+@media (max-width: 1024px) {
+    .split {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .heading {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+
+    .visualSide {
+        height: 400px;
+        /* Move visual to top or bottom if needed, currently it will just stack */
+        order: -1;
+        /* Visualize first */
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 64px 0;
+    }
+
+    .heading {
+        font-size: 32px;
+    }
+
+    .item {
+        padding: 24px;
+    }
+
+    .visualSide {
+        height: 300px;
+    }
+
+    .visualShape {
+        width: 200px;
+        height: 200px;
+    }
+}

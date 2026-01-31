@@ -1,0 +1,57 @@
+.section {
+    padding: 160px 0;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.headline {
+    font-size: 56px;
+    line-height: 1.1;
+    font-weight: 500;
+    color: var(--foreground);
+    margin-bottom: 48px;
+    font-family: var(--font-plus-jakarta);
+    letter-spacing: -0.02em;
+}
+
+.highlight {
+    color: #1a73e8;
+    /* Webrook Blue */
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+}
+
+.primaryBtn {
+    background: #1a73e8;
+    color: #fff;
+    padding: 18px 48px;
+    border-radius: 40px;
+    font-size: 18px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+    font-family: var(--font-plus-jakarta);
+}
+
+.primaryBtn:hover {
+    background: #1765cc;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26, 115, 232, 0.4);
+}
+
+@media (max-width: 768px) {
+    .headline {
+        font-size: 40px;
+    }
+}

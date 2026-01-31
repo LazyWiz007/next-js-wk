@@ -296,29 +296,59 @@
     gap: 32px;
 }
 
+.mobileGroup {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
 .mobileGroupHeader {
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: #9aa0a6;
-    letter-spacing: 0.05em;
-    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #202124;
     font-family: var(--font-plus-jakarta);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: none;
+    border: none;
+    padding: 16px 0;
+    cursor: pointer;
+    text-align: left;
+}
+
+.mobileGroupHeader.active {
+    color: #1a73e8;
+}
+
+.mobileGroupArrow {
+    transition: transform 0.3s ease;
+    color: #5f6368;
 }
 
 .mobileGroupLinks {
     display: flex;
     flex-direction: column;
     gap: 12px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-left: 8px;
+}
+
+.mobileGroupLinks.open {
+    max-height: 500px;
+    /* Arbitrary large height to allow expansion */
+    padding-bottom: 24px;
 }
 
 .mobileLink {
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--foreground);
+    font-size: 16px;
+    font-weight: 400;
+    color: #5f6368;
     text-decoration: none;
     font-family: var(--font-plus-jakarta);
-    padding: 4px 0;
+    padding: 6px 0;
+    display: block;
 }
 
 .mobileSubHeader {

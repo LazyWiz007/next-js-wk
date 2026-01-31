@@ -18,7 +18,7 @@ const CAPABILITIES = [
     {
         title: 'Digital Platforms',
         desc: 'Scalable web & mobile ecosystems.',
-        video: '/video/appdesign_webrook.mp4'
+        video: '/video/appdesign_webrook2.mp4'
     },
     {
         title: 'Intelligent Products',

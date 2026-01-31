@@ -56,6 +56,14 @@ export default function AIInAction() {
     const gridRef = useRef<HTMLDivElement>(null);
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [activeSlide, setActiveSlide] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        setIsMobile(window.innerWidth <= 640);
+        const handleResize = () => setIsMobile(window.innerWidth <= 640);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     // Mobile Scroll Listener for Pagination
     useEffect(() => {
@@ -352,7 +360,7 @@ export default function AIInAction() {
                             title={item.title}
                             outcome={item.outcome}
                             actionLabel={item.actionLabel}
-                            isActive={hoveredIndex === index || (typeof window !== 'undefined' && window.innerWidth <= 640 && activeSlide === index)}
+                            isActive={hoveredIndex === index || (isMobile && activeSlide === index)}
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
                         />

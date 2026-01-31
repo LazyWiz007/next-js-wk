@@ -104,6 +104,7 @@ export default function Navbar() {
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [activeMobileCategory, setActiveMobileCategory] = useState<string | null>(null);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
@@ -260,8 +261,24 @@ export default function Navbar() {
                     <div className={styles.mobileMenuContent}>
                         {NAV_DATA.map((item) => (
                             <div key={item.label} className={styles.mobileGroup}>
-                                <div className={styles.mobileGroupHeader}>{item.label}</div>
-                                <div className={styles.mobileGroupLinks}>
+                                <button
+                                    className={`${styles.mobileGroupHeader} ${activeMobileCategory === item.label ? styles.active : ''}`}
+                                    onClick={() => setActiveMobileCategory(activeMobileCategory === item.label ? null : item.label)}
+                                >
+                                    {item.label}
+                                    <ChevronDownIcon
+                                        className={styles.mobileGroupArrow}
+                                        style={{
+                                            transform: activeMobileCategory === item.label ? 'rotate(180deg)' : 'rotate(0deg)',
+                                            width: '16px',
+                                            height: '16px'
+                                        }}
+                                    />
+                                </button>
+
+                                <div
+                                    className={`${styles.mobileGroupLinks} ${activeMobileCategory === item.label ? styles.open : ''}`}
+                                >
                                     {item.children?.map(child => (
                                         <div key={child.label}>
                                             {child.subChildren ? (

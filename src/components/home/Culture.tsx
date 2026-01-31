@@ -7,7 +7,7 @@ export default function Culture() {
         <section className={styles.section}>
             <div className={styles.background}>
                 <Image
-                    src="/images/cycling-culture.png"
+                    src="/images/webrook_tfn.jpg"
                     alt="Cyclists in mist"
                     fill
                     className={styles.image}

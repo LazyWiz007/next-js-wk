@@ -348,7 +348,21 @@ export default function AIInAction() {
             <div className="container" style={{ position: 'relative', zIndex: 2 }}>
                 <div className={styles.header}>
                     <span className={styles.label}>Real-World Impact</span>
-                    <h2 className={styles.title}>AI in Action</h2>
+                    <h2 className={styles.title}>
+                        <span className={styles.gradientText}>AI in Action</span>
+                        <svg className={styles.aiIcon} width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L14.4 7.2L20 9.5L14.4 11.8L12 17L9.6 11.8L4 9.5L9.6 7.2L12 2Z" fill="url(#aiGradient)" />
+                            <path d="M19 16L20 18L22 19L20 20L19 22L18 20L16 19L18 18L19 16Z" fill="url(#aiGradient)" />
+                            <path d="M6 17L7 19L9 20L7 21L6 23L5 21L3 20L5 19L6 17Z" fill="url(#aiGradient)" />
+                            <defs>
+                                <linearGradient id="aiGradient" x1="2" y1="2" x2="22" y2="23" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stopColor="#ea4335" />
+                                    <stop offset="50%" stopColor="#fbbc04" />
+                                    <stop offset="100%" stopColor="#34a853" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </h2>
                 </div>
 
                 <div className={styles.grid} ref={gridRef}>

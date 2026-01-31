@@ -53,7 +53,27 @@ export default function AIInAction() {
     const sectionRef = useRef<HTMLElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+    const gridRef = useRef<HTMLDivElement>(null);
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const [activeSlide, setActiveSlide] = useState(0);
+
+    // Mobile Scroll Listener for Pagination
+    useEffect(() => {
+        const grid = gridRef.current;
+        if (!grid) return;
+
+        const handleScroll = () => {
+            const scrollLeft = grid.scrollLeft;
+            const width = grid.offsetWidth; // Use offsetWidth or clientWidth logic depending on snap
+            // For snap carousel where checks are rough:
+            // Assuming nearly full width cards + gap, basic division works well enough for dots
+            const index = Math.round(scrollLeft / (window.innerWidth * 0.85)); // 85vw is the card width approx
+            setActiveSlide(Math.min(Math.max(0, index), ACTIONS.length - 1));
+        };
+
+        grid.addEventListener('scroll', handleScroll, { passive: true });
+        return () => grid.removeEventListener('scroll', handleScroll);
+    }, []);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -323,7 +343,7 @@ export default function AIInAction() {
                     <h2 className={styles.title}>AI in Action</h2>
                 </div>
 
-                <div className={styles.grid}>
+                <div className={styles.grid} ref={gridRef}>
                     {ACTIONS.map((item, index) => (
                         <ParticleCard
                             key={item.id}
@@ -332,9 +352,19 @@ export default function AIInAction() {
                             title={item.title}
                             outcome={item.outcome}
                             actionLabel={item.actionLabel}
-                            isActive={hoveredIndex === index}
+                            isActive={hoveredIndex === index || (typeof window !== 'undefined' && window.innerWidth <= 640 && activeSlide === index)}
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}
+                        />
+                    ))}
+                </div>
+
+                {/* Mobile Pagination Dots */}
+                <div className={styles.pagination}>
+                    {ACTIONS.map((_, index) => (
+                        <div
+                            key={index}
+                            className={`${styles.dot} ${index === activeSlide ? styles.activeDot : ''}`}
                         />
                     ))}
                 </div>

@@ -1,6 +1,6 @@
 .section {
     padding: 120px 0;
-    background: #fff;
+    background: linear-gradient(to bottom, #fff calc(100% - 120px), #000 0);
 }
 
 .header {
@@ -28,147 +28,321 @@
     font-family: var(--font-plus-jakarta);
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+/* Full Width Accordion */
+.accordionGrid {
+    display: flex;
+    width: 100%;
+    height: 700px;
+    /* Taller for impact */
+    overflow: hidden;
 }
 
 .card {
     position: relative;
-    border-radius: 16px;
-    padding: 40px 32px;
+    flex: 1;
+    /* Default equal width */
+    height: 100%;
+    padding: 48px 32px;
     overflow: hidden;
     isolation: isolate;
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     justify-content: flex-end;
-    min-height: 400px;
     cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    transition: flex 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Smooth expansion */
+}
+
+.card:last-child {
+    border-right: none;
+}
+
+/* Expansion logic: Hovered grows */
+.card:hover {
+    flex: 2.5;
+    /* Grows to 2.5x width */
 }
 
 .cardBackground {
     position: absolute;
     inset: 0;
     z-index: -1;
-    transition: transform 0.6s ease;
+    background: #000;
 }
 
-.cardImage {
+/* Video - Full Color, Always Visible */
+.cardVideo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    opacity: 1;
+    filter: brightness(0.9);
+    /* Slight dim for text readability, but full color */
+    transition: transform 0.6s ease, filter 0.6s ease;
+    z-index: 0;
 }
 
-.card:hover .cardImage {
+.card:hover .cardVideo {
     transform: scale(1.05);
+    filter: brightness(1.1);
 }
 
 .cardOverlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.8));
-    transition: background 0.4s ease;
-}
-
-.card:hover .cardOverlay {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.9));
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0) 0%,
+            rgba(0, 0, 0, 0.3) 50%,
+            rgba(0, 0, 0, 0.8) 100%);
+    z-index: 1;
+    opacity: 0.9;
+    transition: opacity 0.4s ease;
 }
 
 .cardContent {
     position: relative;
-    z-index: 1;
+    z-index: 10;
     width: 100%;
+    opacity: 0.9;
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.iconWrapper {
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 24px;
-    transition: color 0.3s ease;
+/* Hide content slightly on non-hovered items if needed, or keep expanding */
+/* Let's keep content visible but shift it nicely */
+
+.cardHeader {
+    position: absolute;
+    top: 48px;
+    right: 32px;
 }
 
-.card:hover .iconWrapper {
+.index {
+    font-family: var(--font-plus-jakarta);
+    font-size: 14px;
+    font-weight: 500;
     color: #fff;
+    opacity: 0.8;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 6px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.textWrapper {
+    min-width: 400px;
+    /* Prevent text wrapping during squeeze */
 }
 
 .cardTitle {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: 600;
     color: #fff;
     margin-bottom: 12px;
-    font-family: var(--font-plus-jakarta);
-    transition: transform 0.3s ease;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
 }
 
 .cardDesc {
     font-size: 16px;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
     font-weight: 400;
-    font-family: var(--font-plus-jakarta);
-    opacity: 0.9;
-    transition: opacity 0.3s ease;
+    max-width: 400px;
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
 }
 
-.card:hover .cardTitle {
-    transform: translateY(-2px);
+/* Only show description and explore on hover (expansion) */
+.card:hover .cardDesc {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.explore {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease 0.1s;
+}
+
+.card:hover .explore {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.exploreText {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    color: #fff;
+}
+
+/* Mobile Responsiveness */
+.mobileCarouselWrapper {
+    display: none;
+    /* Hidden on Desktop */
 }
 
 @media (max-width: 1024px) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .section {
-        padding: 64px 0;
+    .accordionGrid {
+        display: none;
+        /* Hide Desktop Accordion */
     }
 
     .header {
-        margin-bottom: 40px;
+        /* Hide Header on Mobile if requested, or keep it? User said "different section". Let's keep it simple and hide for full immersion or keep typical header?
+           User said "use different section... visible only on mobile". I'll put the header inside the first card? Or just hide standard header. */
+        display: block;
+        padding: 0 24px;
+        margin-bottom: 24px;
     }
-}
 
-@media (max-width: 640px) {
+    .section {
+        padding: 40px 0;
+        background: linear-gradient(to bottom, #fff calc(100% - 40px), #000 0);
+        /* Match dark theme for mobile */
+    }
 
-    /* Mobile Carousel Logic */
-    .grid {
+    .mobileCarouselWrapper {
+        display: block;
+        position: relative;
+        width: 100vw;
+        height: 80vh;
+        /* Immersive height */
+    }
+
+    .mobileGrid {
         display: flex;
+        width: 100%;
+        height: 100%;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        gap: 16px;
-        padding-bottom: 24px;
         -webkit-overflow-scrolling: touch;
-        margin: 0 -24px;
-        /* Expand to edges */
-        padding: 0 24px 24px 24px;
-        /* Inner padding */
-    }
-
-    /* Hide scrollbar */
-    .grid::-webkit-scrollbar {
-        display: none;
-    }
-
-    .grid {
-        -ms-overflow-style: none;
         scrollbar-width: none;
     }
 
-    .title {
-        font-size: 32px;
+    .mobileGrid::-webkit-scrollbar {
+        display: none;
     }
 
-    .card {
-        min-width: 85vw;
-        /* Almost full width with peek */
-        scroll-snap-align: center;
-        min-height: 400px;
-        padding: 32px 24px;
-        flex-shrink: 0;
-        /* Prevent shrinking */
+    .mobileCard {
+        position: relative;
+        min-width: 100vw;
+        height: 100%;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 40px 24px 80px 24px;
+        /* Bottom padding for controls */
+        isolation: isolate;
+    }
+
+    .mobileCardBackground {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+    }
+
+    .mobileVideo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .mobileOverlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.8));
+    }
+
+    .mobileContent {
+        color: #fff;
+        z-index: 10;
+    }
+
+    .mobileIndex {
+        display: inline-block;
+        font-family: var(--font-plus-jakarta);
+        font-size: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        padding: 4px 10px;
+        border-radius: 20px;
+        margin-bottom: 16px;
+        backdrop-filter: blur(4px);
+    }
+
+    .mobileTitle {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 12px;
+    }
+
+    .mobileDesc {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 24px;
+        line-height: 1.5;
+        max-width: 90%;
+    }
+
+    .mobileExplore {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    /* Controls */
+    .mobileControls {
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+        display: flex;
+        gap: 12px;
+        z-index: 20;
+    }
+
+    .controlBtn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .controlBtn:active {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+    .controlIcon {
+        width: 24px;
+        height: 24px;
     }
 }

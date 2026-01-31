@@ -74,7 +74,7 @@
     border-color: var(--foreground);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .content {
         padding: 0 20px;
     }
@@ -90,5 +90,12 @@
 
     .button {
         width: 100%;
+    }
+
+    /* Target the global class specifically within this module's container */
+    .content :global(.headline-hero) {
+        font-size: 32px !important;
+        /* Force smaller size */
+        line-height: 1.15;
     }
 }

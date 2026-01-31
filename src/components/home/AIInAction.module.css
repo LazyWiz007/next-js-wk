@@ -58,6 +58,10 @@
     }
 }
 
+.pagination {
+    display: none;
+}
+
 @media (max-width: 640px) {
     .section {
         padding: 80px 0;
@@ -73,7 +77,7 @@
         display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        gap: 16px;
+        gap: 24px;
         padding-bottom: 24px;
         -webkit-overflow-scrolling: touch;
         margin: 0 -24px;
@@ -96,13 +100,46 @@
     }
 
     .title {
-        font-size: 32px;
+        font-size: 36px;
+        line-height: 1.1;
     }
 
     /* Ensure child cards behave in carousel */
     .grid>* {
-        min-width: 85vw;
+        min-width: 88vw;
         scroll-snap-align: center;
         flex-shrink: 0;
+        background: rgba(255, 255, 255, 0.6);
+        /* Subtle glass */
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        /* Crisp tech border */
+        box-shadow: none;
+        /* Removed as requested */
+        border-radius: 16px;
+        padding: 24px 0;
+    }
+
+    /* Pagination Dots */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 24px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #d1d5db;
+        transition: all 0.3s ease;
+    }
+
+    .activeDot {
+        background: #1a73e8;
+        width: 24px;
+        /* Elongated active dot */
+        border-radius: 4px;
     }
 }

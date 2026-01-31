@@ -271,7 +271,7 @@ export default function Hero() {
                     next era.
                 </h1>
 
-                <p className="text-subhead fade-in-up" style={{ animationDelay: '2s', maxWidth: '540px', margin: '24px auto 0' }}>
+                <p className="text-subhead fade-in-up" style={{ animationDelay: '2s', maxWidth: '440px', margin: '24px auto 0' }}>
                     Webrook is an AI-first systems studio. We build infrastructure, intelligence, and long-term capability.
                 </p>
 

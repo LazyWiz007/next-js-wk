@@ -232,9 +232,15 @@
         width: 100%;
         height: 100%;
         overflow-x: auto;
+        overflow-y: hidden;
+        /* Lock vertical axis */
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        touch-action: pan-y;
+        /* Allow vertical page scroll, let element handle horizontal */
+        overscroll-behavior-x: contain;
+        /* Prevent swipe-nav triggers */
     }
 
     .mobileGrid::-webkit-scrollbar {

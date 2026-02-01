@@ -61,6 +61,35 @@
     animation: pulse 3s infinite ease-in-out;
 }
 
+.controls {
+    display: none;
+}
+
+.controlBtn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #5f6368;
+}
+
+.controlBtn:active {
+    background: #fff;
+    transform: scale(0.95);
+}
+
+.controlIcon {
+    width: 24px;
+    height: 24px;
+}
+
 @keyframes pulse {
 
     0%,
@@ -135,9 +164,17 @@
     .title {
         font-size: 40px;
         line-height: 1.1;
-        flex-direction: row;
-        /* Keep icon inline */
+        flex-direction: column;
         gap: 12px;
+    }
+
+    .controls {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 24px;
+        position: static;
+        transform: none;
     }
 
     .aiIcon {

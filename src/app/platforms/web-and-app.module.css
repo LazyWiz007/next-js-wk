@@ -1,0 +1,174 @@
+.sectionWrapper {
+    padding: 60px 0;
+    padding-bottom: 240px;
+    background: #fff;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.splitLayout {
+    display: flex;
+    gap: 24px;
+    height: 650px;
+    /* Specific height for expansion */
+    width: 100%;
+}
+
+.card {
+    position: relative;
+    flex: 1;
+    /* Both start equal */
+    background: #f8f9fa;
+    border-radius: 24px;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center content vertically initially */
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    cursor: pointer;
+    overflow: hidden;
+    border: 1px solid transparent;
+}
+
+/* Hover Effect: Expand one, shrink other */
+.splitLayout:hover .card {
+    flex: 1;
+    /* Default state when hovering container but not specific card */
+    opacity: 0.6;
+    /* Dim non-hovered cards */
+}
+
+.splitLayout .card:hover {
+    flex: 2.5;
+    /* Grow significantly */
+    background: #e8f0fe;
+    /* Google Light Blue tint */
+    opacity: 1;
+    border-color: #d2e3fc;
+}
+
+/* Typography */
+.label {
+    font-family: var(--font-plus-jakarta);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #5f6368;
+    letter-spacing: 0.05em;
+    margin-bottom: 24px;
+    display: block;
+}
+
+.title {
+    font-family: var(--font-plus-jakarta);
+    font-size: 40px;
+    font-weight: 600;
+    color: #202124;
+    margin-bottom: 16px;
+    line-height: 1.2;
+    white-space: pre-wrap;
+    /* Prevent breaking on shrink */
+    transition: font-size 0.4s ease;
+}
+
+.subtitle {
+    font-family: var(--font-plus-jakarta);
+    font-size: 20px;
+    font-weight: 500;
+    color: #5f6368;
+    margin-bottom: 32px;
+    line-height: 1.4;
+    opacity: 0.9;
+    transition: all 0.4s ease;
+}
+
+/* Hidden Details - Reveal on Hover */
+.details {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: all 0.5s ease 0.1s;
+    /* Delay slightly */
+}
+
+.card:hover .details {
+    max-height: 500px;
+    /* arbitrary large height */
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 24px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #444746;
+    margin-bottom: 40px;
+    max-width: 90%;
+}
+
+.bulletList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 48px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.bulletItem {
+    font-size: 16px;
+    color: #444746;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-weight: 500;
+}
+
+.bulletItem::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: #1a73e8;
+    border-radius: 50%;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .splitLayout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .card {
+        min-height: 400px;
+        padding: 40px;
+    }
+
+    .splitLayout:hover .card {
+        flex: 1;
+        /* Disable flex scaling logic on mobile */
+        opacity: 1;
+    }
+
+    .card:hover {
+        flex: 1;
+        /* Reset flex */
+    }
+
+    /* On mobile, maybe always show details? or standard expansion */
+    .details {
+        max-height: none;
+        opacity: 1;
+        transform: none;
+        margin-top: 24px;
+    }
+}

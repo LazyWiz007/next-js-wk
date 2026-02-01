@@ -1,5 +1,6 @@
 'use client';
 import { useRef, useEffect, useState } from 'react';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import styles from './AIInAction.module.css';
 import ParticleCard from './ParticleCard';
 
@@ -341,6 +342,14 @@ export default function AIInAction() {
         };
     }, [hoveredIndex]);
 
+    const scroll = (direction: 'left' | 'right') => {
+        if (gridRef.current) {
+            const cardWidth = 350; // Approximating card width + gap
+            const scrollAmount = direction === 'left' ? -cardWidth : cardWidth;
+            gridRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    };
+
     return (
         <section className={styles.section} ref={sectionRef}>
             <canvas ref={canvasRef} className={styles.globalCanvas} />
@@ -363,6 +372,17 @@ export default function AIInAction() {
                             </defs>
                         </svg>
                     </h2>
+
+
+                    {/* Desktop/Tablet Navigation */}
+                    <div className={styles.controls}>
+                        <button onClick={() => scroll('left')} className={styles.controlBtn} aria-label="Scroll left">
+                            <ChevronLeftIcon className={styles.controlIcon} />
+                        </button>
+                        <button onClick={() => scroll('right')} className={styles.controlBtn} aria-label="Scroll right">
+                            <ChevronRightIcon className={styles.controlIcon} />
+                        </button>
+                    </div>
                 </div>
 
                 <div className={styles.grid} ref={gridRef}>
@@ -391,6 +411,6 @@ export default function AIInAction() {
                     ))}
                 </div>
             </div>
-        </section>
+        </section >
     );
 }

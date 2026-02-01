@@ -64,9 +64,9 @@ const NAV_DATA: NavItem[] = [
         description: 'Infrastructure for the next generation of web.',
         overviewLink: '/platforms',
         children: [
-            { label: 'Global Network', desc: 'Distributed cloud infrastructure.', icon: Icons.Globe, href: '/platforms/network' },
-            { label: 'Mobile Ecosystem', desc: 'Next-gen application framework.', icon: Icons.Smartphone, href: '/platforms/mobile' },
-            { label: 'Enterprise Core', desc: 'Scalable business foundations.', icon: Icons.Building, href: '/platforms/enterprise' },
+            { label: 'Global Network', desc: 'Distributed cloud infrastructure.', icon: Icons.Globe, href: '/platforms#global-network' },
+            { label: 'Mobile Ecosystem', desc: 'Next-gen application framework.', icon: Icons.Smartphone, href: '/platforms#mobile-ecosystem' },
+            { label: 'Enterprise Core', desc: 'Scalable business foundations.', icon: Icons.Building, href: '/platforms#enterprise-core' },
         ]
     },
     {

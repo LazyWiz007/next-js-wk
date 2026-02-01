@@ -1,0 +1,475 @@
+.main {
+    padding-top: var(--header-height);
+    background: #fff;
+    overflow-x: hidden;
+    padding-bottom: 120px;
+}
+
+/* --- HERO SECTION --- */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 0;
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.heroLabel {
+    font-family: var(--font-plus-jakarta);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5f6368;
+    margin-bottom: 24px;
+    font-weight: 600;
+}
+
+.heroTitle {
+    font-family: var(--font-plus-jakarta);
+    font-size: clamp(48px, 6vw, 84px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+}
+
+.brandGradient {
+    background: linear-gradient(135deg, #ea4335 0%, #fbbc04 50%, #34a853 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.heroSubtitle {
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #202124;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.heroDesc {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #5f6368;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.divider {
+    width: 100%;
+    height: 1px;
+    background: #f1f3f4;
+    margin: 0;
+}
+
+/* --- MAIN SECTIONS --- */
+.sectionWrapper {
+    padding: 120px 0;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.sectionHeader {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 80px;
+}
+
+.sectionTitle {
+    font-family: var(--font-plus-jakarta);
+    font-size: 48px;
+    font-weight: 600;
+    color: #202124;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+}
+
+.sectionDesc {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #5f6368;
+}
+
+/* --- SUB-SECTION: ACCORDION CARDS (What we build) --- */
+.subSection {
+    margin-bottom: 100px;
+}
+
+.subSectionTitle {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #9aa0a6;
+    letter-spacing: 0.05em;
+    margin-bottom: 32px;
+    padding-left: 24px;
+    /* Align with container padding visually if needed */
+}
+
+.accordionGrid {
+    display: flex;
+    width: 100%;
+    height: 500px;
+    /* Adjust height */
+    overflow: hidden;
+    gap: 1px;
+    /* Divider look */
+    background: #f1f3f4;
+    /* Divider color */
+    border: 1px solid #f1f3f4;
+}
+
+.card {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    padding: 40px 32px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    cursor: pointer;
+    background: #fff;
+    transition: flex 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover {
+    flex: 3;
+    /* Expand on hover */
+    background: #f8f9fa;
+}
+
+/* Abstract Gradients for Card Backgrounds */
+.cardGradient {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    z-index: 0;
+}
+
+.card:hover .cardGradient {
+    opacity: 0.1;
+    /* Subtle tint */
+}
+
+/* Gradient Variants */
+.gradientRed {
+    background: linear-gradient(135deg, #ea4335, #fff);
+}
+
+.gradientYellow {
+    background: linear-gradient(135deg, #fbbc04, #fff);
+}
+
+.gradientGreen {
+    background: linear-gradient(135deg, #34a853, #fff);
+}
+
+.gradientBlue {
+    background: linear-gradient(135deg, #1a73e8, #fff);
+}
+
+.cardContent {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+}
+
+.cardIndex {
+    font-family: var(--font-plus-jakarta);
+    font-size: 14px;
+    font-weight: 500;
+    color: #9aa0a6;
+    margin-bottom: auto;
+    /* Push to top */
+    position: absolute;
+    top: -300px;
+    /* Hidden initially or styled differently? Let's keep it clean */
+    left: 0;
+}
+
+/* Actually lets put index at top */
+.cardIndexVisible {
+    position: absolute;
+    top: 40px;
+    left: 32px;
+    font-family: var(--font-plus-jakarta);
+    font-size: 14px;
+    color: #dadce0;
+}
+
+.cardTitle {
+    font-size: 24px;
+    font-weight: 600;
+    color: #202124;
+    margin-bottom: 12px;
+    white-space: nowrap;
+}
+
+.cardDesc {
+    font-size: 16px;
+    color: #5f6368;
+    max-width: 400px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.card:hover .cardDesc {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- SUB-SECTION: SPLIT LIST (How they work) --- */
+.splitSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+}
+
+.splitContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.listGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    /* Connected list */
+}
+
+.listItem {
+    padding: 32px;
+    border-left: 2px solid #f1f3f4;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.listItem:hover,
+.listItemActive {
+    border-left-color: #1a73e8;
+    /* Default active color, overridden inline */
+    background: linear-gradient(to right, #f8f9fa, transparent);
+}
+
+.listItemTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #202124;
+    margin-bottom: 8px;
+}
+
+.listItemDesc {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #5f6368;
+}
+
+.visualSide {
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: #f8f9fa;
+    border-radius: 24px;
+}
+
+.featureMethods {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shape {
+    width: 200px;
+    height: 200px;
+    background: #dadce0;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 24px;
+}
+
+/* Shape States */
+.shapeActive {
+    transform: scale(1.2);
+}
+
+/* Quote Section */
+.quoteWrapper {
+    margin-top: 80px;
+    text-align: center;
+}
+
+.quoteText {
+    font-size: 24px;
+    font-weight: 500;
+    font-style: italic;
+    color: #1a73e8;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* --- CONCLUSION --- */
+.conclusion {
+    padding: 120px 0 60px;
+    text-align: center;
+    background: #fff;
+}
+
+.conclusionTitle {
+    font-size: 40px;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.conclusionText {
+    font-size: 24px;
+    color: #5f6368;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* --- MOBILE --- */
+.mobileCarousel {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    .heroTitle {
+        font-size: 48px;
+    }
+
+    .splitSection {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .visualSide {
+        height: 300px;
+        order: -1;
+    }
+
+    /* Hide styled accordion on mobile, show carousel */
+    .accordionGrid {
+        display: none;
+    }
+
+    .mobileCarousel {
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        padding-bottom: 24px;
+        scroll-snap-type: x mandatory;
+        /* Mobile scroll fix */
+        touch-action: pan-y;
+        overscroll-behavior-x: contain;
+    }
+
+    .mobileCard {
+        min-width: 85vw;
+        background: #f8f9fa;
+        padding: 32px;
+        border-radius: 16px;
+        scroll-snap-align: center;
+    }
+
+    .mobileCardTitle {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #202124;
+    }
+
+    .mobileCardDesc {
+        font-size: 15px;
+        color: #5f6368;
+        line-height: 1.5;
+    }
+}
+
+/* --- DARK MODE OVERRIDES (e.g. for Agents Section) --- */
+.darkSection {
+    background: #050505;
+    color: #fff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.darkSection .sectionTitle {
+    color: #fff;
+}
+
+.darkSection .sectionDesc {
+    color: #9aa0a6;
+}
+
+.darkSection .accordionGrid {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.darkSection .card {
+    background: #0f1012;
+}
+
+.darkSection .card:hover {
+    background: #1a1b1e;
+}
+
+.darkSection .cardTitle {
+    color: #fff;
+}
+
+.darkSection .cardDesc {
+    color: #bdc1c6;
+}
+
+.darkSection .listItem {
+    border-left-color: rgba(255, 255, 255, 0.1);
+}
+
+.darkSection .listItem:hover,
+.darkSection .listItemActive {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
+}
+
+.darkSection .listItemTitle {
+    color: #fff;
+}
+
+.darkSection .listItemDesc {
+    color: #9aa0a6;
+}
+
+.darkSection .visualSide {
+    background: #0f1012;
+}
+
+.darkSection .shape {
+    background: #202124;
+}
+
+.darkSection .mobileCard {
+    background: #0f1012;
+}
+
+.darkSection .mobileCardTitle {
+    color: #fff;
+}
+
+.darkSection .mobileCardDesc {
+    color: #bdc1c6;
+}

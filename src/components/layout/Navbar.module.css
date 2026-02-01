@@ -84,19 +84,26 @@
 }
 
 /* Mega Menu Container */
+/* Mega Menu Container - Full Width Fix */
 .megaMenu {
-    position: absolute;
+    position: fixed;
     top: var(--header-height);
     left: 0;
     width: 100vw;
     background: #fff;
-    border-top: 1px solid var(--border);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
-    padding: 48px 0 64px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    /* Subtle divider */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    /* Softer shadow */
+    padding: 60px 0;
+    /* More breathing room */
     opacity: 0;
     animation: slideDown 0.2s ease forwards;
     display: flex;
     justify-content: center;
+    z-index: 999;
+    /* Below header */
 }
 
 .menuGrid {
@@ -105,7 +112,9 @@
     padding: 0 24px;
     display: grid;
     grid-template-columns: 350px 1fr;
-    gap: 80px;
+    gap: 120px;
+    /* Increased gap for cleanliness */
+    align-items: flex-start;
 }
 
 /* Overview Column (Left) */
@@ -156,20 +165,26 @@
 }
 
 /* Link Items */
+/* Link Items */
 .megaLinkItem {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     text-decoration: none;
-    padding: 8px 16px;
-    margin: 0 -16px;
-    border-radius: 8px;
+    padding: 10px 0;
+    /* Remove horizontal padding, keep vertical */
+    margin: 0;
+    border-radius: 0;
+    /* Remove block hover effect */
     transition: all 0.2s ease;
     gap: 16px;
 }
 
 .megaLinkItem:hover {
-    background: rgba(26, 115, 232, 0.04);
+    background: none;
+    /* Remove background on hover for cleaner text-only feel */
+    transform: translateX(4px);
+    /* Subtle shift */
 }
 
 .linkIconWrapper {

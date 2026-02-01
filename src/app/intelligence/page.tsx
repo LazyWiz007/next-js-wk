@@ -1,0 +1,228 @@
+'use client';
+
+import { useState } from 'react';
+import styles from './intelligence.module.css';
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
+
+interface Feature {
+    title: string;
+    desc: string;
+    gradientClass?: string;
+}
+
+interface Method {
+    title: string;
+    desc: string;
+}
+
+const SECTIONS = [
+    {
+        id: 'models',
+        title: 'AI Models',
+        desc: 'Purpose-built models, trained for context — not demos.',
+        subtitle: 'We design and deploy AI models tailored to specific industries. These models go beyond generic prediction — they understand context, variability, and real-world noise.',
+        featuresTitle: 'What we build',
+        features: [
+            { title: 'Industry-Specific Models', desc: 'Fine-tuned for manufacturing, healthcare, and energy sectors.', gradientClass: 'gradientRed' },
+            { title: 'Computer Vision', desc: 'Automated inspection and monitoring pipelines.', gradientClass: 'gradientBlue' },
+            { title: 'Predictive Engines', desc: 'Forecasting for operations, quality, and risk.', gradientClass: 'gradientYellow' },
+            { title: 'Custom LLMs', desc: 'Secure language models trained on proprietary data.', gradientClass: 'gradientGreen' }
+        ],
+        howWorksTitle: 'How they work',
+        howWorks: [
+            { title: 'Production-First Design', desc: 'Architected for reliability and low latency, not just experimentation.' },
+            { title: 'Operational Training', desc: 'Models are trained on real-world noisy data, not perfect datasets.' },
+            { title: 'Feedback Loops', desc: 'Continuous improvement systems that learn from human-in-the-loop corrections.' },
+            { title: 'Explainable AI', desc: 'Decision transparency ensures trust in critical environments.' }
+        ],
+        quote: 'Intelligence that learns from the real world — and improves within it.',
+        color: '#ea4335' // Red
+    },
+    {
+        id: 'agents',
+        title: 'Autonomous Agents',
+        desc: 'From intelligence to action.',
+        subtitle: 'Our autonomous agents execute workflows, make decisions, and interact with systems — without constant human intervention.',
+        featuresTitle: 'What we build',
+        features: [
+            { title: 'Ops Agents', desc: 'Automated monitoring and support workflows.', gradientClass: 'gradientBlue' },
+            { title: 'Enterprise Decisioning', desc: 'Agents that integrate with ERPs to optimize resources.', gradientClass: 'gradientRed' },
+            { title: 'Assistive Copilots', desc: 'Tools that augment internal teams with instant knowledge.', gradientClass: 'gradientYellow' },
+            { title: 'Multi-Agent Swarms', desc: 'Coordinated systems for complex, parallel tasks.', gradientClass: 'gradientGreen' }
+        ],
+        howWorksTitle: 'What makes them different',
+        howWorks: [
+            { title: 'Goal-Oriented', desc: 'Agents pursue objectives rather than following rigid if-then rules.' },
+            { title: 'Context-Aware', desc: 'They maintain state and understand the broader operational picture.' },
+            { title: 'Deep Integration', desc: 'Seamlessly connected to existing software stacks and APIs.' },
+            { title: 'Human-Aligned', desc: 'Designed to reduce overhead while keeping humans in control of key decisions.' }
+        ],
+        quote: 'Systems that don’t just think — they act.',
+        color: '#fbbc04' // Yellow
+    },
+    {
+        id: 'systems',
+        title: 'Industrial Systems',
+        desc: 'Intelligence embedded into physical infrastructure.',
+        subtitle: 'We bridge software, hardware, and data to automate processes inside industrial environments where complexity is highest.',
+        featuresTitle: 'Where we deploy',
+        features: [
+            { title: 'Manufacturing Control', desc: 'Real-time quality and process automation.', gradientClass: 'gradientGreen' },
+            { title: 'Supply Chain AI', desc: 'Predictive inventory and logistics optimization.', gradientClass: 'gradientBlue' },
+            { title: 'Infrastructure Inspection', desc: 'Drones and sensors for asset monitoring.', gradientClass: 'gradientYellow' },
+            { title: 'Edge AI Devices', desc: 'Low-power intelligence deployed on-device.', gradientClass: 'gradientRed' }
+        ],
+        howWorksTitle: 'What we enable',
+        howWorks: [
+            { title: 'Real-Time Monitoring', desc: 'Instant anomaly detection and alert systems.' },
+            { title: 'Cost Reduction', desc: 'Minimizing waste and manual oversight through automation.' },
+            { title: 'Scalability', desc: 'Deploying intelligence across distributed physical assets.' },
+            { title: 'Data-Driven Decisions', desc: 'Grounding operational choices in live system reality.' }
+        ],
+        quote: 'AI that operates where the real work happens.',
+        color: '#34a853' // Green
+    }
+];
+
+export default function IntelligencePage() {
+    // State to track active list item for "How It Works" section
+    // We can use a composite key or map to track active state per section if needed.
+    // For simplicity, let's just default to the first item being active roughly, 
+    // or track active index per section.
+    const [activeIndices, setActiveIndices] = useState<{ [key: string]: number }>({
+        models: 0,
+        agents: 0,
+        systems: 0
+    });
+
+    const handleMouseEnter = (sectionId: string, index: number) => {
+        setActiveIndices(prev => ({ ...prev, [sectionId]: index }));
+    };
+
+    return (
+        <main className={styles.main}>
+            {/* HERO */}
+            <section className={styles.hero}>
+                <div className="container">
+                    <span className={styles.heroLabel}>Webrook Intelligence</span>
+                    <h1 className={styles.heroTitle}>
+                        Building applied intelligence<br />
+                        <span className={styles.brandGradient}>for real-world systems.</span>
+                    </h1>
+                    <p className={styles.heroSubtitle}>
+                        At Webrook, intelligence isn’t a feature — it’s infrastructure.
+                    </p>
+                    <p className={styles.heroDesc}>
+                        {/* We design AI systems that integrate deeply into industries... */}
+                        We design AI systems that integrate deeply into industries, workflows, and decision-making environments.
+                    </p>
+                </div>
+            </section>
+
+            <div className={styles.divider} />
+
+            {/* SECTIONS LOOP */}
+            {SECTIONS.map((section) => (
+                <div
+                    key={section.id}
+                    className={`${styles.sectionWrapper} ${section.id === 'agents' ? styles.darkSection : ''}`}
+                    id={section.id}
+                >
+                    <div className="container">
+
+                        {/* 1. Header */}
+                        <div className={styles.sectionHeader}>
+                            <h2 className={styles.sectionTitle}>{section.title}</h2>
+                            <p className={styles.sectionDesc}>{section.subtitle}</p>
+                        </div>
+
+                        {/* 2. What We Build (Accordion Cards) */}
+                        <div className={styles.subSection}>
+                            <div className={styles.subSectionTitle}>{section.featuresTitle}</div>
+
+                            {/* Desktop Accordion */}
+                            <div className={styles.accordionGrid}>
+                                {section.features.map((feature, idx) => (
+                                    <div key={idx} className={styles.card}>
+                                        <div className={`${styles.cardGradient} ${styles[feature.gradientClass || 'gradientBlue']}`} />
+                                        <span className={styles.cardIndexVisible}>0{idx + 1}</span>
+                                        <div className={styles.cardContent}>
+                                            <h3 className={styles.cardTitle}>{feature.title}</h3>
+                                            <p className={styles.cardDesc}>{feature.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Mobile Carousel */}
+                            <div className={styles.mobileCarousel}>
+                                {section.features.map((feature, idx) => (
+                                    <div key={idx} className={styles.mobileCard}>
+                                        <div className={styles.mobileCardTitle}>{feature.title}</div>
+                                        <div className={styles.mobileCardDesc}>{feature.desc}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* 3. How They Work (Split Interactive List) */}
+                        <div className={styles.subSection}>
+                            <div className={styles.subSectionTitle}>{section.howWorksTitle}</div>
+
+                            <div className={styles.splitSection}>
+                                <div className={styles.splitContent}>
+                                    <div className={styles.listGroup}>
+                                        {section.howWorks.map((method, idx) => (
+                                            <div
+                                                key={idx}
+                                                className={`${styles.listItem} ${activeIndices[section.id] === idx ? styles.listItemActive : ''}`}
+                                                onMouseEnter={() => handleMouseEnter(section.id, idx)}
+                                                style={{ borderLeftColor: activeIndices[section.id] === idx ? section.color : '' }}
+                                            >
+                                                <h3 className={styles.listItemTitle}>{method.title}</h3>
+                                                <p className={styles.listItemDesc}>{method.desc}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className={styles.visualSide}>
+                                    <div className={styles.featureMethods}>
+                                        {/* Abstract Shape that changes based on active index */}
+                                        <div
+                                            className={styles.shape}
+                                            style={{
+                                                background: section.color,
+                                                opacity: 0.2 + (activeIndices[section.id] * 0.1), // Subtle change
+                                                transform: `scale(${0.8 + (activeIndices[section.id] * 0.1)}) rotate(${activeIndices[section.id] * 45}deg)`,
+                                                borderRadius: activeIndices[section.id] % 2 === 0 ? '50%' : '12px'
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Quote */}
+                        <div className={styles.quoteWrapper}>
+                            <p className={styles.quoteText} style={{ color: section.color }}>
+                                "{section.quote}"
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            ))}
+
+            {/* CONCLUSION */}
+            <section className={styles.conclusion}>
+                <div className="container">
+                    <h2 className={styles.conclusionTitle}>How It Comes Together</h2>
+                    <p className={styles.conclusionText}>
+                        AI Models provide intelligence. Autonomous Agents translate it into action. Industrial Systems embed it into reality.
+                    </p>
+                </div>
+            </section>
+        </main>
+    );
+}

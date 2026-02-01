@@ -54,9 +54,9 @@ const NAV_DATA: NavItem[] = [
         description: 'Pioneering the future of artificial cognition.',
         overviewLink: '/intelligence',
         children: [
-            { label: 'AI Models', desc: 'State-of-the-art language processing.', icon: Icons.Brain, href: '/intelligence/models' },
-            { label: 'Autonomous Agents', desc: 'Self-governing task execution.', icon: Icons.Bot, href: '/intelligence/agents' },
-            { label: 'Industrial Systems', desc: 'AI for manufacturing & logic.', icon: Icons.Factory, href: '/intelligence/industrial' },
+            { label: 'AI Models', desc: 'State-of-the-art language processing.', icon: Icons.Brain, href: '/intelligence#models' },
+            { label: 'Autonomous Agents', desc: 'Self-governing task execution.', icon: Icons.Bot, href: '/intelligence#agents' },
+            { label: 'Industrial Systems', desc: 'AI for manufacturing & logic.', icon: Icons.Factory, href: '/intelligence#systems' },
         ]
     },
     {

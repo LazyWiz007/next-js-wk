@@ -1,0 +1,332 @@
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-plus-jakarta, sans-serif);
+    overflow-x: hidden;
+}
+
+/* Common Layout Utilities */
+.sectionWrapper {
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+/* Specific Section Heights for "calm" feel */
+.heroSection {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.standardSection {
+    padding: 6rem 2rem;
+    /* Consistent padding */
+    max-width: var(--container-max);
+    margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+    .standardSection {
+        padding: 8rem 4rem;
+    }
+}
+
+/* Split Layout for "Who We Are" */
+.splitLayout {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .splitLayout {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.splitContent {
+    padding: 4rem 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+    .splitContent {
+        padding: 6rem 4rem;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+    }
+
+    .splitVisual {
+        padding: 6rem 4rem;
+    }
+}
+
+.splitVisual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    /* Removed padding for full bleed image */
+    background-color: var(--surface);
+    /* Fallback */
+    overflow: hidden;
+    /* Ensure image doesn't spill */
+    min-height: 400px;
+    /* Ensure height on mobile */
+}
+
+.splitVisual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Abstract Grid Background for visual sections */
+/* Abstract Grid Background for visual sections */
+.abstractGrid {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    /* Fixed to cover screen or absolute to container? User said "grid lines in gradient". */
+    /* Let's keep it absolute to the container for now, but ensure it covers the area. */
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    /* Let clicks pass through */
+    z-index: 0;
+    /* Behind content */
+
+    /* The Grid Pattern */
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 50px 50px;
+
+    /* The Mask: Radial Gradient controlled by --x and --y */
+    /* We use a fallback for no-js/server, but the JS updates --x, --y */
+    mask-image: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%),
+            black,
+            transparent 80%);
+    -webkit-mask-image: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%),
+            black,
+            transparent 80%);
+
+    opacity: 0.6;
+    /* Subtlety */
+}
+
+
+/* Typography Overrides */
+.heroHeadline {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 500;
+    /* Medium per brief */
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(180deg, var(--foreground) 0%, #4a4a4a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.sectionHeadline {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+}
+
+.bodyText {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    /* "Large, readable line-height" */
+    color: #4b5563;
+    /* Softer text color for calm feel */
+    max-width: 60ch;
+    margin-bottom: 1.5rem;
+}
+
+/* Micro-interactions */
+.softLink {
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.softLink::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.softLink:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Specific Modules */
+.principleItem {
+    border-left: 1px solid var(--border);
+    /* Thin line marker */
+    padding-left: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    transition: border-color 0.3s ease;
+}
+
+.principleItem:hover {
+    border-left-color: var(--hover-color, var(--foreground));
+}
+
+.moduleGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    /* Gap for border effect */
+    background-color: var(--border);
+    /* Border color for gap */
+}
+
+.moduleCard {
+    background-color: var(--background);
+    padding: 3rem 2rem;
+    transition: background-color 0.3s ease;
+}
+
+.moduleCard:hover {
+    background-color: #fafafa;
+}
+
+/* Utilities */
+.textCenter {
+    text-align: center;
+}
+
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fullHeight {
+    height: 100%;
+}
+
+.bulletList {
+    list-style: none;
+    padding: 0;
+}
+
+.bulletItem {
+    font-size: 1.25rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+}
+
+.bulletItem::before {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: var(--foreground);
+    margin-right: 1.5rem;
+    border-radius: 50%;
+}
+
+.breathingText {
+    background: linear-gradient(90deg, #EF3636, #FDB514, #55BB5D, #EF3636);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: breathe 6s ease infinite;
+    display: inline-block;
+    /* Helps with transform if needed */
+}
+
+@keyframes breathe {
+    0% {
+        background-position: 0% 50%;
+        opacity: 0.9;
+    }
+
+    50% {
+        background-position: 100% 50%;
+        opacity: 1;
+    }
+
+    100% {
+        background-position: 0% 50%;
+        opacity: 0.9;
+    }
+}
+
+/* Partner Section */
+/* Partner Section - Infinite Scroll */
+.partnerMarquee {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 4rem;
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.marqueeTrack {
+    display: flex;
+    align-items: center;
+    gap: 10rem;
+    width: max-content;
+    animation: scroll 40s linear infinite;
+    padding: 2rem 0;
+    /* Space for hover transform */
+}
+
+/* Pause on hover for better interaction */
+.marqueeTrack:hover {
+    animation-play-state: paused;
+}
+
+.partnerLogo {
+    height: 120px;
+    /* Significantly increased size */
+    width: auto;
+    opacity: 0.6;
+    filter: grayscale(100%);
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.partnerLogo:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}

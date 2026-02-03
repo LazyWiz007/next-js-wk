@@ -93,9 +93,9 @@ const NAV_DATA: NavItem[] = [
         description: 'Our philosophy, brand, and the alliances that drive us forward.',
         overviewLink: '/about',
         children: [
-            { label: 'The Webrook Philosophy', href: '/about/philosophy', icon: Icons.Book },
-            { label: 'Our Brand', href: '/about/brand', icon: Icons.Star },
-            { label: 'Alliances & Partners', href: '/about/partners', icon: Icons.Users },
+            { label: 'The Webrook Philosophy', href: '/about#philosophy', icon: Icons.Book },
+            { label: 'Our Brand', href: '/about#brand', icon: Icons.Star },
+            { label: 'Alliances & Partners', href: '/about#partners', icon: Icons.Users },
         ]
     },
 ];

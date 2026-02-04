@@ -38,6 +38,63 @@
     min-height: 600px;
     position: relative;
     box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+    transition: background 0.2s ease-out;
+    z-index: 1;
+}
+
+/* Trigger effects only when hovering the visual part */
+.productCard:has(.visual:hover) {
+    background: #bbbbbb;
+}
+
+.productCard:has(.visual:hover) .productName {
+    color: #202124;
+}
+
+.productCard:has(.visual:hover) .headline {
+    background: none;
+    -webkit-text-fill-color: initial;
+    color: #000;
+}
+
+.productCard:has(.visual:hover) .description {
+    color: #333;
+}
+
+.productCard:has(.visual:hover) .primaryBtn {
+    background: #000;
+    color: #fff;
+}
+
+/* Wave/Virus Animation */
+.productCard::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1500px;
+    height: 1500px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.productCard:has(.visual:hover)::after {
+    animation: shockwave 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes shockwave {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
 }
 
 .content {
@@ -64,6 +121,7 @@
     letter-spacing: -0.01em;
     font-family: var(--font-plus-jakarta);
     color: #fff;
+    transition: color 0.2s ease-out;
 }
 
 .headline {
@@ -76,6 +134,7 @@
     -webkit-text-fill-color: transparent;
     margin-bottom: 24px;
     font-family: var(--font-plus-jakarta);
+    transition: all 0.2s ease-out;
 }
 
 .description {
@@ -85,6 +144,7 @@
     margin-bottom: 48px;
     max-width: 480px;
     font-family: var(--font-plus-jakarta);
+    transition: color 0.2s ease-out;
 }
 
 .actions {
@@ -108,7 +168,7 @@
 
 .primaryBtn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .comingSoon {
@@ -117,6 +177,11 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-weight: 600;
+    transition: color 0.2s ease-out;
+}
+
+.productCard:has(.visual:hover) .comingSoon {
+    color: #444;
 }
 
 /* Visual Side */
@@ -127,6 +192,12 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    transition: background 0.5s ease;
+    z-index: 1;
+}
+
+.productCard:has(.visual:hover) .visual {
+    background: transparent;
 }
 
 .visualInner {
@@ -139,7 +210,7 @@
     transition: transform 0.5s ease;
 }
 
-.productCard:hover .visualInner {
+.productCard:has(.visual:hover) .visualInner {
     transform: perspective(1000px) rotateY(-5deg) rotateX(2deg) scale(0.95);
 }
 

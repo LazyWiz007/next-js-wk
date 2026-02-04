@@ -33,17 +33,13 @@ export default function Products() {
                     {/* Abstract Product Visual Placeholder - could be a generated UI mock later */}
                     <div className={styles.visual}>
                         <div className={styles.visualInner}>
-                            <div className={styles.screenMockup}>
-                                {/* Abstract UI Lines */}
-                                <div className={styles.uiLine} style={{ width: '60%' }} />
-                                <div className={styles.uiLine} style={{ width: '80%' }} />
-                                <div className={styles.uiLine} style={{ width: '40%' }} />
-                                <div className={styles.uiGrid}>
-                                    <div className={styles.uiBox} />
-                                    <div className={styles.uiBox} />
-                                    <div className={styles.uiBox} />
-                                </div>
-                            </div>
+                            <Image
+                                src="/images/taprook/Business_Card_Mockup.png"
+                                alt="Taprook Business Card"
+                                width={500}
+                                height={300}
+                                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px' }}
+                            />
                         </div>
                     </div>
                 </div>

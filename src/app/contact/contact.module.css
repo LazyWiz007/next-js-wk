@@ -1,0 +1,181 @@
+/* Container and Layout */
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-plus-jakarta, sans-serif);
+    overflow-x: hidden;
+    position: relative;
+    padding-top: 6rem;
+    /* Navbar separation */
+}
+
+/* Gradient Grid Background (Copied from About Us) */
+.abstractGrid {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+    /* The Grid Pattern */
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 50px 50px;
+
+    /* The Mask: Radial Gradient controlled by --x and --y */
+    mask-image: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%),
+            black,
+            transparent 80%);
+    -webkit-mask-image: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%),
+            black,
+            transparent 80%);
+    opacity: 0.6;
+}
+
+/* Split Layout */
+.splitLayout {
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    min-height: 80vh;
+    position: relative;
+    z-index: 1;
+    /* Above grid */
+}
+
+@media (min-width: 1024px) {
+    .splitLayout {
+        grid-template-columns: 1fr 1fr;
+        padding: 4rem 2rem;
+        gap: 4rem;
+    }
+}
+
+/* Left Column: Details */
+.infoColumn {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.heading {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(180deg, var(--foreground) 0%, #4a4a4a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subText {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #4b5563;
+    max-width: 45ch;
+    margin-bottom: 3rem;
+}
+
+.contactDetail {
+    margin-bottom: 2rem;
+}
+
+.label {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.value {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--foreground);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.value:hover {
+    color: #555;
+}
+
+/* Right Column: Form */
+.formColumn {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.formCard {
+    background: rgba(255, 255, 255, 0.5);
+    /* Glassmorphism light */
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    padding: 3rem;
+    border-radius: 8px;
+    /* Clean corners, not fully rounded */
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.input,
+.textarea,
+.select {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    font-family: var(--font-plus-jakarta, sans-serif);
+    font-size: 1rem;
+    color: var(--foreground);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    border-radius: 4px;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+    outline: none;
+    border-color: #1f1f1f;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* Engineering Style Button */
+.submitButton {
+    background-color: var(--foreground);
+    color: var(--background);
+    padding: 1rem 2rem;
+    border: none;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+.submitButton:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}

@@ -145,15 +145,49 @@
     flex: 3;
     /* Expand on hover */
     background: #f8f9fa;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+.cardVideoWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.cardVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+.videoOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
 /* Abstract Gradients for Card Backgrounds */
 .cardGradient {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    /* Top border strip */
+    background: #ccc;
+    z-index: 2;
+    /* Content above video */
     opacity: 0;
     transition: opacity 0.6s ease;
-    z-index: 0;
 }
 
 .card:hover .cardGradient {
@@ -210,14 +244,14 @@
 .cardTitle {
     font-size: 24px;
     font-weight: 600;
-    color: #202124;
+    color: #ffffff;
     margin-bottom: 12px;
     white-space: nowrap;
 }
 
 .cardDesc {
     font-size: 16px;
-    color: #5f6368;
+    color: #ffffff;
     max-width: 400px;
     opacity: 0;
     transform: translateY(20px);
@@ -368,23 +402,40 @@
         display: none;
     }
 
+    .mobileCarouselWrapper {
+        position: relative;
+        width: 100%;
+        display: flex;
+        /* Flex to contain */
+    }
+
     .mobileCarousel {
         display: flex;
         overflow-x: auto;
         gap: 16px;
         padding-bottom: 24px;
         scroll-snap-type: x mandatory;
-        /* Mobile scroll fix */
         touch-action: pan-y;
         overscroll-behavior-x: contain;
+        scrollbar-width: none;
+        /* Hide scrollbar for cleaner look */
+        width: 100%;
+    }
+
+    .mobileCarousel::-webkit-scrollbar {
+        display: none;
     }
 
     .mobileCard {
         min-width: 85vw;
         background: #f8f9fa;
-        padding: 32px;
+        padding: 32px 60px;
+        /* Increased side padding for arrows */
         border-radius: 16px;
         scroll-snap-align: center;
+        flex-shrink: 0;
+        position: relative;
+        /* Ensure layout context */
     }
 
     .mobileCardTitle {
@@ -398,6 +449,59 @@
         font-size: 15px;
         color: #5f6368;
         line-height: 1.5;
+    }
+
+    /* Carousel Arrows */
+    .carouselArrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #fff;
+        border: 1px solid #dadce0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        transition: all 0.2s ease;
+    }
+
+    .carouselArrow:active {
+        transform: translateY(-50%) scale(0.95);
+        background: #f1f3f4;
+    }
+
+    .carouselArrowLeft {
+        left: 10px;
+    }
+
+    .carouselArrowRight {
+        right: 10px;
+    }
+
+    .carouselIcon {
+        width: 20px;
+        height: 20px;
+        color: #5f6368;
+    }
+
+    /* Dark Mode Overrides for Arrows */
+    .darkSection .carouselArrow {
+        background: #202124;
+        border-color: #3c4043;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .darkSection .carouselIcon {
+        color: #e8eaed;
+    }
+
+    .darkSection .carouselArrow:active {
+        background: #303134;
     }
 }
 

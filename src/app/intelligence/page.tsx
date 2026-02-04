@@ -1,13 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styles from './intelligence.module.css';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
 interface Feature {
     title: string;
     desc: string;
     gradientClass?: string;
+    videoSrc?: string;
 }
 
 interface Method {
@@ -15,7 +16,20 @@ interface Method {
     desc: string;
 }
 
-const SECTIONS = [
+interface Section {
+    id: string;
+    title: string;
+    desc: string;
+    subtitle: string;
+    featuresTitle: string;
+    features: Feature[];
+    howWorksTitle: string;
+    howWorks: Method[];
+    quote: string;
+    color: string;
+}
+
+const SECTIONS: Section[] = [
     {
         id: 'models',
         title: 'AI Models',
@@ -23,10 +37,10 @@ const SECTIONS = [
         subtitle: 'We design and deploy AI models tailored to specific industries. These models go beyond generic prediction — they understand context, variability, and real-world noise.',
         featuresTitle: 'What we build',
         features: [
-            { title: 'Industry-Specific Models', desc: 'Fine-tuned for manufacturing, healthcare, and energy sectors.', gradientClass: 'gradientRed' },
-            { title: 'Computer Vision', desc: 'Automated inspection and monitoring pipelines.', gradientClass: 'gradientBlue' },
-            { title: 'Predictive Engines', desc: 'Forecasting for operations, quality, and risk.', gradientClass: 'gradientYellow' },
-            { title: 'Custom LLMs', desc: 'Secure language models trained on proprietary data.', gradientClass: 'gradientGreen' }
+            { title: 'Industry-Specific ', desc: 'Fine-tuned for manufacturing, healthcare, and energy sectors.', videoSrc: '/video/AI models/1.mp4' },
+            { title: 'Computer Vision', desc: 'Automated inspection and monitoring pipelines.', gradientClass: 'gradientBlue', videoSrc: '/video/AI models/2.mp4' },
+            { title: 'Predictive Engines', desc: 'Forecasting for operations, quality, and risk.', gradientClass: 'gradientYellow', videoSrc: '/video/AI models/3.mp4' },
+            { title: 'Custom LLMs', desc: 'Secure language models trained on proprietary data.', gradientClass: 'gradientGreen', videoSrc: '/video/AI models/4.mp4' }
         ],
         howWorksTitle: 'How they work',
         howWorks: [
@@ -45,10 +59,10 @@ const SECTIONS = [
         subtitle: 'Our autonomous agents execute workflows, make decisions, and interact with systems — without constant human intervention.',
         featuresTitle: 'What we build',
         features: [
-            { title: 'Ops Agents', desc: 'Automated monitoring and support workflows.', gradientClass: 'gradientBlue' },
-            { title: 'Enterprise Decisioning', desc: 'Agents that integrate with ERPs to optimize resources.', gradientClass: 'gradientRed' },
-            { title: 'Assistive Copilots', desc: 'Tools that augment internal teams with instant knowledge.', gradientClass: 'gradientYellow' },
-            { title: 'Multi-Agent Swarms', desc: 'Coordinated systems for complex, parallel tasks.', gradientClass: 'gradientGreen' }
+            { title: 'Ops Agents', desc: 'Automated monitoring and support workflows.', gradientClass: 'gradientBlue', videoSrc: '/video/AI models/autonomous/1.mp4' },
+            { title: 'Enterprise Decisioning', desc: 'Agents that integrate with ERPs to optimize resources.', gradientClass: 'gradientRed', videoSrc: '/video/AI models/autonomous/2.mp4' },
+            { title: 'Assistive Copilots', desc: 'Tools that augment internal teams with instant knowledge.', gradientClass: 'gradientYellow', videoSrc: '/video/AI models/autonomous/3.mp4' },
+            { title: 'Multi-Agent Swarms', desc: 'Coordinated systems for complex, parallel tasks.', gradientClass: 'gradientGreen', videoSrc: '/video/AI models/autonomous/4.mp4' }
         ],
         howWorksTitle: 'What makes them different',
         howWorks: [
@@ -67,10 +81,10 @@ const SECTIONS = [
         subtitle: 'We bridge software, hardware, and data to automate processes inside industrial environments where complexity is highest.',
         featuresTitle: 'Where we deploy',
         features: [
-            { title: 'Manufacturing Control', desc: 'Real-time quality and process automation.', gradientClass: 'gradientGreen' },
-            { title: 'Supply Chain AI', desc: 'Predictive inventory and logistics optimization.', gradientClass: 'gradientBlue' },
-            { title: 'Infrastructure Inspection', desc: 'Drones and sensors for asset monitoring.', gradientClass: 'gradientYellow' },
-            { title: 'Edge AI Devices', desc: 'Low-power intelligence deployed on-device.', gradientClass: 'gradientRed' }
+            { title: 'Manufacturing Control', desc: 'Real-time quality and process automation.', gradientClass: 'gradientGreen', videoSrc: '/video/AI models/3.mp4' },
+            { title: 'Supply Chain AI', desc: 'Predictive inventory and logistics optimization.', gradientClass: 'gradientBlue', videoSrc: '/video/AI models/autonomous/2.mp4' },
+            { title: 'Infrastructure Inspection', desc: 'Drones and sensors for asset monitoring.', gradientClass: 'gradientYellow', videoSrc: '/video/AI models/2.mp4' },
+            { title: 'Edge AI Devices', desc: 'Low-power intelligence deployed on-device.', gradientClass: 'gradientRed', videoSrc: '/video/AI models/autonomous/4.mp4' }
         ],
         howWorksTitle: 'What we enable',
         howWorks: [
@@ -86,17 +100,30 @@ const SECTIONS = [
 
 export default function IntelligencePage() {
     // State to track active list item for "How It Works" section
-    // We can use a composite key or map to track active state per section if needed.
-    // For simplicity, let's just default to the first item being active roughly, 
-    // or track active index per section.
     const [activeIndices, setActiveIndices] = useState<{ [key: string]: number }>({
         models: 0,
         agents: 0,
         systems: 0
     });
 
+    const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
+    const carouselRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
     const handleMouseEnter = (sectionId: string, index: number) => {
         setActiveIndices(prev => ({ ...prev, [sectionId]: index }));
+    };
+
+    const handleMouseEnterCard = (idx: number) => {
+        if (videoRefs.current[idx]) {
+            videoRefs.current[idx]?.play().catch(() => { }); // Catch play promise errors
+        }
+    };
+
+    const handleMouseLeaveCard = (idx: number) => {
+        if (videoRefs.current[idx]) {
+            videoRefs.current[idx]?.pause();
+            if (videoRefs.current[idx]) videoRefs.current[idx]!.currentTime = 0; // Reset video to start
+        }
     };
 
     return (
@@ -143,8 +170,26 @@ export default function IntelligencePage() {
                             {/* Desktop Accordion */}
                             <div className={styles.accordionGrid}>
                                 {section.features.map((feature, idx) => (
-                                    <div key={idx} className={styles.card}>
-                                        <div className={`${styles.cardGradient} ${styles[feature.gradientClass || 'gradientBlue']}`} />
+                                    <div
+                                        key={idx}
+                                        className={styles.card}
+                                        onMouseEnter={() => handleMouseEnterCard(idx)}
+                                        onMouseLeave={() => handleMouseLeaveCard(idx)}
+                                    >
+                                        {feature.videoSrc && (
+                                            <div className={styles.cardVideoWrapper}>
+                                                <video
+                                                    ref={(el) => (videoRefs.current[idx] = el) as any}
+                                                    src={feature.videoSrc}
+                                                    muted
+                                                    playsInline
+                                                    loop
+                                                    className={styles.cardVideo}
+                                                />
+                                                <div className={styles.videoOverlay} />
+                                            </div>
+                                        )}
+                                        <div className={`${styles.cardGradient} ${styles[feature.gradientClass || 'gradientBlue']}`} style={{ opacity: feature.videoSrc ? 0.3 : 1 }} />
                                         <span className={styles.cardIndexVisible}>0{idx + 1}</span>
                                         <div className={styles.cardContent}>
                                             <h3 className={styles.cardTitle}>{feature.title}</h3>
@@ -155,13 +200,40 @@ export default function IntelligencePage() {
                             </div>
 
                             {/* Mobile Carousel */}
-                            <div className={styles.mobileCarousel}>
-                                {section.features.map((feature, idx) => (
-                                    <div key={idx} className={styles.mobileCard}>
-                                        <div className={styles.mobileCardTitle}>{feature.title}</div>
-                                        <div className={styles.mobileCardDesc}>{feature.desc}</div>
-                                    </div>
-                                ))}
+                            <div className={styles.mobileCarouselWrapper}>
+                                <button
+                                    className={`${styles.carouselArrow} ${styles.carouselArrowLeft}`}
+                                    onClick={() => {
+                                        const container = carouselRefs.current[section.id];
+                                        if (container) container.scrollBy({ left: -300, behavior: 'smooth' });
+                                    }}
+                                    aria-label="Scroll Left"
+                                >
+                                    <ChevronLeftIcon className={styles.carouselIcon} />
+                                </button>
+
+                                <div
+                                    className={styles.mobileCarousel}
+                                    ref={(el) => (carouselRefs.current[section.id] = el) as any}
+                                >
+                                    {section.features.map((feature, idx) => (
+                                        <div key={idx} className={styles.mobileCard}>
+                                            <div className={styles.mobileCardTitle}>{feature.title}</div>
+                                            <div className={styles.mobileCardDesc}>{feature.desc}</div>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <button
+                                    className={`${styles.carouselArrow} ${styles.carouselArrowRight}`}
+                                    onClick={() => {
+                                        const container = carouselRefs.current[section.id];
+                                        if (container) container.scrollBy({ left: 300, behavior: 'smooth' });
+                                    }}
+                                    aria-label="Scroll Right"
+                                >
+                                    <ChevronRightIcon className={styles.carouselIcon} />
+                                </button>
                             </div>
                         </div>
 

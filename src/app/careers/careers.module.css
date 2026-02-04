@@ -1,0 +1,227 @@
+/* Container and Layout */
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-plus-jakarta, sans-serif);
+    overflow-x: hidden;
+    position: relative;
+    padding-top: 6rem;
+}
+
+/* Gradient Grid Background (Consistent) */
+.abstractGrid {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%),
+            black,
+            transparent 80%);
+    -webkit-mask-image: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%),
+            black,
+            transparent 80%);
+    opacity: 0.6;
+}
+
+/* Hero Section */
+.heroSection {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.heroHeadline {
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(180deg, var(--foreground) 0%, #4a4a4a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.heroSubtext {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: #4b5563;
+    max-width: 60ch;
+}
+
+/* Culture Grid */
+.cultureSection {
+    padding: 6rem 2rem;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.sectionTitle {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    font-weight: 500;
+}
+
+.cultureGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.cultureCard {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    backdrop-filter: blur(5px);
+    transition: transform 0.3s ease;
+}
+
+.cultureCard:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.cultureTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.cultureText {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Job Listings */
+.jobsSection {
+    padding: 6rem 2rem;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.jobCard {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .jobCard {
+        flex-direction: row;
+        align-items: stretch;
+    }
+}
+
+.jobCard:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border-color: #000;
+}
+
+.jobInfo {
+    padding: 2.5rem;
+    flex: 1;
+}
+
+.jobTitle {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--foreground);
+}
+
+.jobMeta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.875rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.jobDesc {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 2rem;
+    max-width: 65ch;
+}
+
+.requirementsList {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.reqItem {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    color: #555;
+}
+
+.reqItem::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--foreground);
+    font-weight: bold;
+}
+
+/* Apply CTA Area */
+.jobAction {
+    padding: 2.5rem;
+    background: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+    .jobAction {
+        width: 250px;
+        border-top: none;
+        border-left: 1px solid var(--border);
+        align-items: center;
+    }
+}
+
+.applyButton {
+    background-color: var(--foreground);
+    color: white;
+    padding: 1rem 2rem;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    display: inline-block;
+}
+
+.applyButton:hover {
+    background-color: #333;
+}

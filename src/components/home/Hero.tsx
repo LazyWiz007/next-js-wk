@@ -138,21 +138,77 @@ export default function Hero() {
             setIsLoaded(true);
         };
 
+        // Signed Distance Function for a Box
+        const sdBox = (pX: number, pY: number, bX: number, bY: number) => {
+            const dX = Math.abs(pX) - bX;
+            const dY = Math.abs(pY) - bY;
+            return Math.hypot(Math.max(dX, 0), Math.max(dY, 0)) + Math.min(Math.max(dX, dY), 0);
+        };
+
+        // SDF for Rook Shape
+        const sdRook = (px: number, py: number, scale: number) => {
+            // Normalize coordinates relative to scale (make 1.0 = full height approx)
+            // Adjust y so (0,0) is center
+            const x = px;
+            const y = py + (0.1 * scale); // Shift center slightly
+
+            // Dimensions relative to scale
+            const wBase = 0.3 * scale;
+            const hBase = 0.15 * scale;
+            const yBase = 0.35 * scale;
+
+            const wNeck = 0.18 * scale;
+            const hNeck = 0.25 * scale;
+            const yNeck = -0.05 * scale;
+
+            const wHead = 0.3 * scale;
+            const hHead = 0.1 * scale;
+            const yHead = -0.4 * scale;
+
+            // Crenellations (3 blocks)
+            const wCren = 0.08 * scale;
+            const hCren = 0.08 * scale;
+            const yCren = -0.55 * scale;
+            const xCrenOffset = 0.22 * scale; // Left/Right spacing
+
+            // Calculate SDFs for each part
+            const dBase = sdBox(x, y - yBase, wBase, hBase);
+            const dNeck = sdBox(x, y - yNeck, wNeck, hNeck);
+            const dHead = sdBox(x, y - yHead, wHead, hHead);
+
+            // Middle Crenellation
+            const dCrenMid = sdBox(x, y - yCren, wCren * 0.8, hCren);
+            // Left Crenellation
+            const dCrenLeft = sdBox(x - xCrenOffset, y - yCren, wCren, hCren);
+            // Right Crenellation
+            const dCrenRight = sdBox(x + xCrenOffset, y - yCren, wCren, hCren);
+
+            // Union (smooth min is better for organics, but hard min is fine for sharp rook)
+            const dBody = Math.min(dBase, dNeck, dHead);
+            const dTop = Math.min(dCrenMid, dCrenLeft, dCrenRight);
+
+            return Math.min(dBody, dTop);
+        };
+
         const animate = () => {
             if (!isVisible) return; // Stop if not visible
 
             ctx.clearRect(0, 0, width, height);
             time += 0.005;
 
-            // Batch drawing by color to minimize state changes and draw calls
+            // Batch drawing by color
             const batches: { [key: string]: Path2D } = {};
             colors.forEach(c => batches[c] = new Path2D());
-            batches['#202124'] = new Path2D(); // Ensure base color exists
+            batches['#202124'] = new Path2D();
 
-            // Re-use vars
-            let p, z, normalizedZ, remainder, isPartVisible, dx, dy, dist, force, targetX, targetY;
+            let p, z, normalizedZ, remainder, isPartVisible;
+            let dx, dy, dist, force, angle;
             const contourStep = 0.18;
             const threshold = 0.015;
+
+            // Rook interaction params
+            const rookScale = 120; // Size of the rook
+            const interactionRadius = rookScale * 1.5; // Influence area
 
             for (let i = 0; i < particles.length; i++) {
                 p = particles[i];
@@ -164,19 +220,52 @@ export default function Hero() {
                 isPartVisible = (remainder < threshold || remainder > contourStep - threshold);
 
                 if (isPartVisible) {
-                    // Interaction
-                    dx = mouse.x - p.x;
-                    dy = mouse.y - p.y;
-                    dist = Math.hypot(dx, dy); // Faster than sqrt logic roughly same
+                    // Interaction: SDF Rook
+                    // Transform particle to mouse-local space
+                    dx = p.x - mouse.x;
+                    dy = p.y - mouse.y;
 
-                    if (dist < mouse.radius) {
-                        force = (mouse.radius - dist) / mouse.radius;
-                        targetX = p.baseX - (dx / dist) * force * 50;
-                        targetY = p.baseY - (dy / dist) * force * 50;
-                        p.x += (targetX - p.x) * 0.1;
-                        p.y += (targetY - p.y) * 0.1;
+                    // Add subtle rotation to the rook based on movement? (Optional, skipping for stability)
+
+                    // Get distance to the Rook shape
+                    dist = sdRook(dx, dy, rookScale);
+
+                    // If inside or near the rook shape (-dist means inside for SDF usually, but here our function returns +dist outside, -dist inside if overlapping boxes? 
+                    // Actually sdBox returns negative if inside.
+
+                    if (dist < 20) { // Interaction Threshold just outside the shape
+                        // Force calculation
+                        // Inside the shape (negative dist) -> Strong repulsion or attraction?
+                        // Let's try Repulsion to make the shape "Clear" (Negative Space Rook)
+                        // Or Attraction to make the shape "Solid" (Positive Space Rook)
+
+                        // User said "background to move in rookshape". 
+                        // A "Rook Shaped Wave" might be best. 
+
+                        // Let's do: Particles push AWAY from the rook border slightly?
+                        // Or simply: If inside rook, move `p` towards rook border?
+
+                        // Simpler Physics: Radial-ish push but modulated by SDF?
+
+                        // Let's try: Repel from the shape center, bounded by the shape.
+
+                        // NEW APPROACH:
+                        // If dist < 0 (Inside Rook), push OUT strongly.
+                        // If dist > 0 but < threshold, push OUT weakly.
+
+                        const pushStrength = dist < 0 ? 50 : (20 - dist);
+                        // Direction? Normal to surface is approximated by dx/dy relative to nearest logic, 
+                        // but simpler is just radial from local center for now, or use gradient of SDF (too expensive).
+
+                        // Use simple radial for direction, modulated by shape proximity
+                        angle = Math.atan2(dy, dx);
+                        const moveX = Math.cos(angle) * pushStrength * 0.5;
+                        const moveY = Math.sin(angle) * pushStrength * 0.5;
+
+                        p.x += moveX * 0.1;
+                        p.y += moveY * 0.1;
                     } else {
-                        // Return to base if drifted
+                        // Return to base
                         if (Math.abs(p.x - p.baseX) > 0.1 || Math.abs(p.y - p.baseY) > 0.1) {
                             p.x += (p.baseX - p.x) * 0.1;
                             p.y += (p.baseY - p.y) * 0.1;
@@ -281,6 +370,9 @@ export default function Hero() {
                     </Link>
                     <Link href="/intelligence" className={`${styles.button} ${styles.secondary}`}>
                         Our Intelligence
+                    </Link>
+                    <Link href="/careers" className={`${styles.button} ${styles.secondary}`} style={{ border: 'none', background: 'transparent', color: '#666', textDecoration: 'underline' }}>
+                        Join the Team
                     </Link>
                 </div>
             </div>

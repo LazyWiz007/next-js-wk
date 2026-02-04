@@ -12,14 +12,16 @@ const ACTIONS = [
         outcome: 'Reducing diagnostic errors by 40% with computer vision pipelines.',
         actionLabel: 'View Case Study',
         shapeType: 'plus' as const,
+        href: '/case-studies/predictive-diagnostics',
     },
     {
         id: 'supply-chain',
         category: 'Supply Chain',
-        title: 'Route Optimization',
+        title: 'AI in Supply Chain',
         outcome: 'Cutting logistics costs by 25% using predictive agent swarms.',
         actionLabel: 'Learn More',
         shapeType: 'ai' as const,
+        href: '/case-studies/supply-chain-ai',
     },
     {
         id: 'manufacturing',
@@ -28,14 +30,16 @@ const ACTIONS = [
         outcome: 'Zero-touch defect detection in real-time assembly lines.',
         actionLabel: 'See Demo',
         shapeType: 'bracket' as const,
+        href: '/case-studies/autonomous-qc',
     },
     {
         id: 'sports',
         category: 'Sports Tech',
-        title: 'Athlete Intelligence',
-        outcome: 'Real-time physiological tracking for elite endurance athletes.',
+        title: 'Motorsports Intelligence',
+        outcome: 'Turning raw telemetry into meaningful performance insights.',
         actionLabel: 'Explore Platform',
         shapeType: 'ai' as const,
+        href: '/case-studies/motorsports-intelligence',
     },
 ];
 
@@ -394,6 +398,7 @@ export default function AIInAction() {
                             title={item.title}
                             outcome={item.outcome}
                             actionLabel={item.actionLabel}
+                            href={(item as any).href}
                             isActive={hoveredIndex === index || (isMobile && activeSlide === index)}
                             onMouseEnter={() => setHoveredIndex(index)}
                             onMouseLeave={() => setHoveredIndex(null)}

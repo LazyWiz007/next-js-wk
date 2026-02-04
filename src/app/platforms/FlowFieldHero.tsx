@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './platforms.module.css';
 
 interface Point {
@@ -15,12 +16,14 @@ interface Particle {
     size: number;
     speed: number;
     offset: number; // Random offset to start position
+    hasTriggeredBreathing: boolean;
 }
 
 export default function FlowFieldHero() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-    const buttonRef = useRef<HTMLButtonElement>(null); // New ref for button alignment
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const router = useRouter();
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -154,12 +157,13 @@ export default function FlowFieldHero() {
 
             for (let i = 0; i < PARTICLE_COUNT; i++) {
                 particles.push({
-                    pathIndex: i % totalPaths, // Distribute evenly across paths to start
+                    pathIndex: i % totalPaths,
                     progress: Math.random(),
                     type: types[i % types.length],
-                    size: 16, // Larger shape for the "hollow" effect
+                    size: 16,
                     speed: BASE_SPEED * (0.9 + Math.random() * 0.2),
-                    offset: 0
+                    offset: 0,
+                    hasTriggeredBreathing: false
                 });
             }
         };
@@ -182,14 +186,9 @@ export default function FlowFieldHero() {
         const drawShape = (ctx: CanvasRenderingContext2D, x: number, y: number, size: number, type: string) => {
             ctx.save();
             ctx.translate(x, y);
-            // ctx.rotate(angle); // Optional: Rotate with path? Image shows upright shapes usually, but flow might imply rotation. Let's keep upright for clean looks or slight rotation.
-            // Actually reference shows upright (squares are axis aligned).
 
-            ctx.strokeStyle = '#9aa0a6'; // Medium Grey
+            ctx.strokeStyle = '#3c4043'; // Darker Grey
             ctx.lineWidth = 1.5;
-            // Fill white to clear background line?
-            // Reference: Line seems to act as "string". Shape sits on it.
-            // Shape is Hollow.
             ctx.fillStyle = '#ffffff';
 
             ctx.beginPath();
@@ -208,7 +207,7 @@ export default function FlowFieldHero() {
 
             // Center Dot
             ctx.beginPath();
-            ctx.fillStyle = '#9aa0a6';
+            ctx.fillStyle = '#3c4043';
             ctx.arc(0, 0, 2, 0, Math.PI * 2);
             ctx.fill();
 
@@ -220,6 +219,8 @@ export default function FlowFieldHero() {
             if (!ctx) return;
             ctx.clearRect(0, 0, width, height);
             time += 0.01;
+
+            const WEBROOK_COLORS = ['#ea4335', '#fbbc04', '#34a853', '#1a73e8'];
 
             // 1. Draw ALL Paths first (so particles sit on top)
             paths.forEach((path, idx) => {
@@ -241,7 +242,7 @@ export default function FlowFieldHero() {
             });
 
             // 2. Draw Particles
-            particles.forEach(p => {
+            particles.forEach((p, idx) => {
                 const path = paths[p.pathIndex];
                 if (!path) return; // Safety
 
@@ -249,8 +250,27 @@ export default function FlowFieldHero() {
                 const gravityAccel = 1 + (p.progress * p.progress * 2);
                 p.progress += p.speed * gravityAccel;
 
+                // Handle Breathing Animation when particle hits end (button)
+                if (p.progress > 0.98 && !p.hasTriggeredBreathing) {
+                    p.hasTriggeredBreathing = true;
+                    if (buttonRef.current) {
+                        const color = WEBROOK_COLORS[idx % WEBROOK_COLORS.length];
+                        buttonRef.current.style.boxShadow = `0 0 25px ${color}`;
+                        buttonRef.current.style.borderColor = color;
+
+                        // Reset style after short delay
+                        setTimeout(() => {
+                            if (buttonRef.current) {
+                                buttonRef.current.style.boxShadow = '';
+                                buttonRef.current.style.borderColor = 'transparent';
+                            }
+                        }, 400);
+                    }
+                }
+
                 if (p.progress >= 1) {
                     p.progress = 0;
+                    p.hasTriggeredBreathing = false;
                 }
 
                 // Fade in/out at extremes
@@ -315,16 +335,15 @@ export default function FlowFieldHero() {
                 </h2>
 
                 <p className={styles.description}>
-                    At Webrook, we don’t just build websites or applications.
                     We design platform-grade systems that power commerce, operations, and growth built to evolve as your business evolves.
-                    From headless commerce to ERP, from launch-ready websites to production-grade applications, our platforms are designed for performance, ownership, and long-term resilience.
+                    From headless commerce to ERP, from launch-ready websites to production-grade applications.
                 </p>
 
                 <button
-                    ref={buttonRef} // Attach ref here
+                    ref={buttonRef}
                     className={styles.ctaButton}
                 >
-                    Launch App
+                    Kick Start Now
                 </button>
             </div>
         </div>

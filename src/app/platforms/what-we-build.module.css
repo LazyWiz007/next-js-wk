@@ -43,7 +43,69 @@
     /* Subtle border */
 }
 
-/* ... existing styles ... */
+/* Content Side Styling */
+.contentSide {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.title {
+    font-family: var(--font-plus-jakarta);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #202124;
+    margin: 0;
+}
+
+.subtitle {
+    font-family: var(--font-plus-jakarta);
+    font-size: 18px;
+    font-weight: 600;
+    color: #3c4043;
+    margin-top: -12px;
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4b5563;
+    margin: 0;
+}
+
+.bulletList {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.bulletItem {
+    position: relative;
+    padding-left: 24px;
+    font-size: 16px;
+    color: #374151;
+    line-height: 1.5;
+}
+
+.bulletItem::before {
+    content: "•";
+    position: absolute;
+    left: 8px;
+    color: #3b82f6;
+    /* Blue-500 */
+    font-weight: bold;
+}
+
+.footerNote {
+    font-size: 14px;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 8px;
+}
 
 /* Connected Network System */
 .visualSide {

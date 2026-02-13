@@ -1,6 +1,8 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useActionState } from 'react';
+import { sendEmail } from '../actions';
+import { Turnstile } from '@marsidev/react-turnstile';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import styles from './contact.module.css';
 
@@ -42,11 +44,28 @@ export default function ContactPage() {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log("Form Submitted (Demo)");
-        alert("Thanks for reaching out! We'll get back to you shortly.");
-    };
+    // Form State for Server Action
+    // We import the server action dynamically to avoid build issues if it's not present yet
+    // but here we assume it's available as we are adding it.
+    // However, since we are in a client component, we need to be careful.
+    // Let's use standard form submission with server action
+    // But we need to import `useActionState` from react (available in React 19 / Next.js 15+)
+    // Or use basic form submission if useActionState is not yet fully stable in this version/setup.
+    // Given Next.js 15+, useActionState is `useFormState` (renamed in React 19 to `useActionState` but `react-dom` handles it).
+    // Actually, `useFormState` is from `react-dom`.
+
+    const [state, formAction, isPending] = useActionState(sendEmail, {
+        message: '',
+        success: false,
+    });
+
+    // Reset form on success
+    const formRef = useRef<HTMLFormElement>(null);
+    useEffect(() => {
+        if (state.success && formRef.current) {
+            formRef.current.reset();
+        }
+    }, [state.success]);
 
     return (
         <div className={styles.container}>
@@ -72,7 +91,7 @@ export default function ContactPage() {
                     <FadeIn delay={0.3}>
                         <div className={styles.contactDetail}>
                             <span className={styles.label}>Email</span>
-                            <a href="mailto:hello@webrook.io" className={styles.value}>hello@webrook.io</a>
+                            <a href="mailto:hello@webrook.in" className={styles.value}>hello@webrook.in</a>
                         </div>
                     </FadeIn>
 
@@ -110,29 +129,48 @@ export default function ContactPage() {
                 <div className={styles.formColumn}>
                     <FadeIn delay={0.3}>
                         <div className={styles.formCard}>
-                            <form onSubmit={handleSubmit}>
+                            <form ref={formRef} action={formAction}>
                                 <div className={styles.formGroup}>
                                     <label htmlFor="name" className={styles.label}>Name</label>
-                                    <input type="text" id="name" required className={styles.input} placeholder="Jane Doe" />
+                                    <input type="text" id="name" name="name" required className={styles.input} placeholder="Jane Doe" />
                                 </div>
                                 <div className={styles.formGroup}>
                                     <label htmlFor="email" className={styles.label}>Email</label>
-                                    <input type="email" id="email" required className={styles.input} placeholder="jane@company.com" />
+                                    <input type="email" id="email" name="email" required className={styles.input} placeholder="jane@company.com" />
                                 </div>
                                 <div className={styles.formGroup}>
                                     <label htmlFor="subject" className={styles.label}>Subject</label>
-                                    <select id="subject" className={styles.select}>
-                                        <option>General Inquiry</option>
-                                        <option>Project Discussion</option>
-                                        <option>Partnership</option>
-                                        <option>Careers</option>
-                                    </select>
+                                    <div className="relative">
+                                        <select id="subject" name="subject" className={styles.select}>
+                                            <option value="General Inquiry">General Inquiry</option>
+                                            <option value="Project Discussion">Project Discussion</option>
+                                            <option value="Partnership">Partnership</option>
+                                            <option value="Careers">Careers</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div className={styles.formGroup}>
                                     <label htmlFor="message" className={styles.label}>Message</label>
-                                    <textarea id="message" required className={styles.textarea} placeholder="Tell us about your system..."></textarea>
+                                    <textarea id="message" name="message" required className={styles.textarea} placeholder="Tell us about your system..."></textarea>
                                 </div>
-                                <button type="submit" className={styles.submitButton}>Send Message</button>
+
+                                <div style={{ marginBottom: '1rem' }}>
+                                    <Turnstile siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'} />
+                                </div>
+
+                                <button type="submit" disabled={isPending} className={styles.submitButton}>
+                                    {isPending ? 'Sending...' : 'Send Message'}
+                                </button>
+
+                                {state.message && (
+                                    <p style={{
+                                        marginTop: '1rem',
+                                        color: state.success ? '#4ade80' : '#f87171',
+                                        fontSize: '0.9rem'
+                                    }}>
+                                        {state.message}
+                                    </p>
+                                )}
                             </form>
                         </div>
                     </FadeIn>

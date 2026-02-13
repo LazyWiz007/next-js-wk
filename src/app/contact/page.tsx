@@ -155,7 +155,7 @@ export default function ContactPage() {
                                 </div>
 
                                 <div style={{ marginBottom: '1rem' }}>
-                                    <Turnstile siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'} />
+                                    <Turnstile siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY as string} />
                                 </div>
 
                                 <button type="submit" disabled={isPending} className={styles.submitButton}>

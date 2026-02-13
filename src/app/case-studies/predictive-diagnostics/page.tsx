@@ -33,7 +33,7 @@ export default function PredictiveDiagnosticsPage() {
 
                     <h2 className={styles.sectionTitle}>What We’re Building</h2>
                     <p className={styles.text}>
-                        We are developing an AI-driven diagnostic system that can estimate critical newborn health indicators — such as weight and key physical parameters — using a single image. The system is designed to work in low-resource environments without requiring specialized medical equipment.
+                        We are developing an AI-driven diagnostic system that can estimate critical newborn health indicators such as weight and key physical parameters using a single image. The system is designed to work in low-resource environments without requiring specialized medical equipment.
                     </p>
 
                     <h2 className={styles.sectionTitle}>Why It Matters</h2>

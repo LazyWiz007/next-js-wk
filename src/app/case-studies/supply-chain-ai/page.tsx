@@ -58,7 +58,7 @@ export default function SupplyChainAIPage() {
 
                     <h2 className={styles.sectionTitle}>Why It Matters</h2>
                     <p className={styles.text}>
-                        Even small inefficiencies in logistics compound into large operational costs. Intelligent optimization can reduce delays, lower costs, and improve predictability — especially in fast-moving or high-volume environments.
+                        Even small inefficiencies in logistics compound into large operational costs. Intelligent optimization can reduce delays, lower costs, and improve predictability especially in fast-moving or high-volume environments.
                     </p>
 
                     <hr className={styles.divider} />

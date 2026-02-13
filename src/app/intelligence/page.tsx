@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from './intelligence.module.css';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 
@@ -33,8 +33,8 @@ const SECTIONS: Section[] = [
     {
         id: 'models',
         title: 'AI Models',
-        desc: 'Purpose-built models, trained for context — not demos.',
-        subtitle: 'We design and deploy AI models tailored to specific industries. These models go beyond generic prediction — they understand context, variability, and real-world noise.',
+        desc: 'Purpose-built models, trained for context not demos.',
+        subtitle: 'We design and deploy AI models tailored to specific industries. These models go beyond generic prediction they understand context, variability, and real-world noise.',
         featuresTitle: 'What we build',
         features: [
             { title: 'Industry-Specific ', desc: 'Fine-tuned for manufacturing, healthcare, and energy sectors.', videoSrc: '/video/AI models/1.mp4' },
@@ -49,14 +49,14 @@ const SECTIONS: Section[] = [
             { title: 'Feedback Loops', desc: 'Continuous improvement systems that learn from human-in-the-loop corrections.' },
             { title: 'Explainable AI', desc: 'Decision transparency ensures trust in critical environments.' }
         ],
-        quote: 'Intelligence that learns from the real world — and improves within it.',
+        quote: 'Intelligence that learns from the real world and improves within it.',
         color: '#ea4335' // Red
     },
     {
         id: 'agents',
         title: 'Autonomous Agents',
         desc: 'From intelligence to action.',
-        subtitle: 'Our autonomous agents execute workflows, make decisions, and interact with systems — without constant human intervention.',
+        subtitle: 'Our autonomous agents execute workflows, make decisions, and interact with systems without constant human intervention.',
         featuresTitle: 'What we build',
         features: [
             { title: 'Ops Agents', desc: 'Automated monitoring and support workflows.', gradientClass: 'gradientBlue', videoSrc: '/video/AI models/autonomous/1.mp4' },
@@ -71,7 +71,7 @@ const SECTIONS: Section[] = [
             { title: 'Deep Integration', desc: 'Seamlessly connected to existing software stacks and APIs.' },
             { title: 'Human-Aligned', desc: 'Designed to reduce overhead while keeping humans in control of key decisions.' }
         ],
-        quote: 'Systems that don’t just think — they act.',
+        quote: 'Systems that don’t just think they act.',
         color: '#fbbc04' // Yellow
     },
     {
@@ -110,19 +110,57 @@ export default function IntelligencePage() {
     const carouselRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
     const handleMouseEnter = (sectionId: string, index: number) => {
-        setActiveIndices(prev => ({ ...prev, [sectionId]: index }));
-    };
-
-    const handleMouseEnterCard = (idx: number) => {
-        if (videoRefs.current[idx]) {
-            videoRefs.current[idx]?.play().catch(() => { }); // Catch play promise errors
+        // Disable hover effect on mobile to prevent conflicts with scroll observer
+        if (window.innerWidth > 1024) {
+            setActiveIndices(prev => ({ ...prev, [sectionId]: index }));
         }
     };
 
-    const handleMouseLeaveCard = (idx: number) => {
-        if (videoRefs.current[idx]) {
-            videoRefs.current[idx]?.pause();
-            if (videoRefs.current[idx]) videoRefs.current[idx]!.currentTime = 0; // Reset video to start
+    // Scroll Spy for Mobile "How It Works"
+    useEffect(() => {
+        if (window.innerWidth > 1024) return; // Only for mobile/tablet
+
+        const observers: IntersectionObserver[] = [];
+
+        SECTIONS.forEach(section => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = Number(entry.target.getAttribute('data-index'));
+                        if (!isNaN(index)) {
+                            setActiveIndices(prev => ({ ...prev, [section.id]: index }));
+                        }
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '-40% 0px -40% 0px', // Active when item is in middle 20% of screen
+                threshold: 0.5
+            });
+
+            // Target all list items for this section
+            const items = document.querySelectorAll(`.js-scroll-item-${section.id}`);
+            items.forEach(item => observer.observe(item));
+            observers.push(observer);
+        });
+
+        return () => {
+            observers.forEach(obs => obs.disconnect());
+        };
+    }, []);
+
+    const handleMouseEnterCard = (sectionId: string, idx: number) => {
+        const key = `${sectionId}-${idx}`;
+        if (videoRefs.current[key as any]) {
+            (videoRefs.current[key as any] as any)?.play().catch(() => { });
+        }
+    };
+
+    const handleMouseLeaveCard = (sectionId: string, idx: number) => {
+        const key = `${sectionId}-${idx}`;
+        if (videoRefs.current[key as any]) {
+            (videoRefs.current[key as any] as any)?.pause();
+            if (videoRefs.current[key as any]) (videoRefs.current[key as any] as any).currentTime = 0;
         }
     };
 
@@ -131,13 +169,13 @@ export default function IntelligencePage() {
             {/* HERO */}
             <section className={styles.hero}>
                 <div className="container">
-                    <span className={styles.heroLabel}>Webrook Intelligence</span>
+                    <span className={styles.heroLabel}>Webrook AI </span>
                     <h1 className={styles.heroTitle}>
-                        Building applied intelligence<br />
+                        Building <br /> Artificial Intelligence <br />
                         <span className={styles.brandGradient}>for real-world systems.</span>
                     </h1>
                     <p className={styles.heroSubtitle}>
-                        At Webrook, intelligence isn’t a feature — it’s infrastructure.
+                        At Webrook, Artificial Intelligence isn’t a feature it’s infrastructure.
                     </p>
                     <p className={styles.heroDesc}>
                         {/* We design AI systems that integrate deeply into industries... */}
@@ -173,13 +211,13 @@ export default function IntelligencePage() {
                                     <div
                                         key={idx}
                                         className={styles.card}
-                                        onMouseEnter={() => handleMouseEnterCard(idx)}
-                                        onMouseLeave={() => handleMouseLeaveCard(idx)}
+                                        onMouseEnter={() => handleMouseEnterCard(section.id, idx)}
+                                        onMouseLeave={() => handleMouseLeaveCard(section.id, idx)}
                                     >
                                         {feature.videoSrc && (
                                             <div className={styles.cardVideoWrapper}>
                                                 <video
-                                                    ref={(el) => (videoRefs.current[idx] = el) as any}
+                                                    ref={(el) => (videoRefs.current[`${section.id}-${idx}` as any] = el) as any}
                                                     src={feature.videoSrc}
                                                     muted
                                                     playsInline
@@ -247,7 +285,8 @@ export default function IntelligencePage() {
                                         {section.howWorks.map((method, idx) => (
                                             <div
                                                 key={idx}
-                                                className={`${styles.listItem} ${activeIndices[section.id] === idx ? styles.listItemActive : ''}`}
+                                                className={`${styles.listItem} ${activeIndices[section.id] === idx ? styles.listItemActive : ''} js-scroll-item-${section.id}`}
+                                                data-index={idx}
                                                 onMouseEnter={() => handleMouseEnter(section.id, idx)}
                                                 style={{ borderLeftColor: activeIndices[section.id] === idx ? section.color : '' }}
                                             >
@@ -261,15 +300,115 @@ export default function IntelligencePage() {
                                 <div className={styles.visualSide}>
                                     <div className={styles.featureMethods}>
                                         {/* Abstract Shape that changes based on active index */}
-                                        <div
-                                            className={styles.shape}
-                                            style={{
-                                                background: section.color,
-                                                opacity: 0.2 + (activeIndices[section.id] * 0.1), // Subtle change
-                                                transform: `scale(${0.8 + (activeIndices[section.id] * 0.1)}) rotate(${activeIndices[section.id] * 45}deg)`,
-                                                borderRadius: activeIndices[section.id] % 2 === 0 ? '50%' : '12px'
-                                            }}
-                                        />
+                                        {(() => {
+                                            const activeIdx = activeIndices[section.id];
+                                            const color = section.color;
+
+                                            if (section.id === 'models') {
+                                                // Models: Neural/Organic - Pulsing Concentric Circles
+                                                return (
+                                                    <div style={{ position: 'relative', width: '200px', height: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                        {[0, 1, 2].map(i => (
+                                                            <div
+                                                                key={i}
+                                                                style={{
+                                                                    position: 'absolute',
+                                                                    border: `2px solid ${color}`,
+                                                                    borderRadius: '50%',
+                                                                    width: `${100 + (i * 40)}px`,
+                                                                    height: `${100 + (i * 40)}px`,
+                                                                    opacity: activeIdx === i ? 0.8 : 0.2,
+                                                                    transform: `scale(${activeIdx === i ? 1.1 : 1})`,
+                                                                    transition: 'all 0.5s ease'
+                                                                }}
+                                                            />
+                                                        ))}
+                                                        <div
+                                                            style={{
+                                                                width: '60px',
+                                                                height: '60px',
+                                                                background: color,
+                                                                borderRadius: '50%',
+                                                                boxShadow: `0 0 30px ${color}`,
+                                                                transition: 'all 0.5s ease',
+                                                                transform: `scale(${1 + (activeIdx * 0.2)})`
+                                                            }}
+                                                        />
+                                                    </div>
+                                                );
+                                            } else if (section.id === 'agents') {
+                                                // Agents: Network/Nodes - Connected Nodes
+                                                return (
+                                                    <div style={{ position: 'relative', width: '200px', height: '200px' }}>
+                                                        {/* Central Hub */}
+                                                        <div
+                                                            style={{
+                                                                position: 'absolute',
+                                                                top: '50%', left: '50%',
+                                                                transform: 'translate(-50%, -50%)',
+                                                                width: '40px', height: '40px',
+                                                                background: color,
+                                                                borderRadius: '4px',
+                                                                zIndex: 2,
+                                                                transition: 'all 0.5s ease'
+                                                            }}
+                                                        />
+                                                        {/* Orbiting Nodes */}
+                                                        {[0, 1, 2, 3].map(i => {
+                                                            const angle = (i * 90) + (activeIdx * 90);
+                                                            const rad = angle * (Math.PI / 180);
+                                                            const radius = 80;
+                                                            const x = Math.cos(rad) * radius;
+                                                            const y = Math.sin(rad) * radius;
+                                                            return (
+                                                                <div
+                                                                    key={i}
+                                                                    style={{
+                                                                        position: 'absolute',
+                                                                        top: '50%', left: '50%',
+                                                                        width: '20px', height: '20px',
+                                                                        borderRadius: '50%',
+                                                                        border: `2px solid ${color}`,
+                                                                        background: i === activeIdx ? color : 'transparent',
+                                                                        transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+                                                                        transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                                                                        opacity: i === activeIdx ? 1 : 0.5
+                                                                    }}
+                                                                />
+                                                            );
+                                                        })}
+                                                        {/* Connecting Lines */}
+                                                        <svg style={{ position: 'absolute', inset: -50, width: 300, height: 300, pointerEvents: 'none', transform: `rotate(${activeIdx * 90}deg)`, transition: 'transform 0.5s ease' }}>
+                                                            <line x1="150" y1="150" x2="150" y2="70" stroke={color} strokeWidth="2" strokeOpacity="0.2" />
+                                                            <line x1="150" y1="150" x2="230" y2="150" stroke={color} strokeWidth="2" strokeOpacity="0.2" />
+                                                            <line x1="150" y1="150" x2="150" y2="230" stroke={color} strokeWidth="2" strokeOpacity="0.2" />
+                                                            <line x1="150" y1="150" x2="70" y2="150" stroke={color} strokeWidth="2" strokeOpacity="0.2" />
+                                                        </svg>
+                                                    </div>
+                                                );
+                                            } else {
+                                                // Systems: Industrial/Layered - Stacked Plates
+                                                return (
+                                                    <div style={{ position: 'relative', width: '200px', height: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px' }}>
+                                                        {[0, 1, 2, 3].map(i => (
+                                                            <div
+                                                                key={i}
+                                                                style={{
+                                                                    width: '120px',
+                                                                    height: '24px',
+                                                                    background: activeIdx === i ? color : 'transparent',
+                                                                    border: `2px solid ${color}`,
+                                                                    borderRadius: '4px',
+                                                                    transform: `translateX(${activeIdx === i ? '20px' : '-20px'}) skewX(-20deg)`,
+                                                                    opacity: activeIdx === i ? 1 : 0.3,
+                                                                    transition: 'all 0.4s ease'
+                                                                }}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                );
+                                            }
+                                        })()}
                                     </div>
                                 </div>
                             </div>

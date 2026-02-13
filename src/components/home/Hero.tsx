@@ -94,7 +94,7 @@ export default function Hero() {
 
                 <div className={`${styles.ctaGroup} fade-in-up`} style={{ animationDelay: '1s' }}>
                     <Link href="/platforms" className={`${styles.button} ${styles.primary}`}>
-                        Explore Platforms
+                        AI Platforms
                     </Link>
                     <Link href="/careers" className={`${styles.button} ${styles.secondary}`} style={{ border: 'none', background: 'transparent', color: 'rgba(255, 255, 255, 0.8)', textDecoration: 'underline' }}>
                         Join the Team

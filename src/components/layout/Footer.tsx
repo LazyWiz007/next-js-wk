@@ -14,7 +14,7 @@ export default function Footer() {
         <footer className={styles.footer}>
             <div className={`container ${styles.footerContainer}`}>
                 <div className={styles.left}>
-                    <span className={styles.copyright}>&copy; {currentYear} Webrook Inc.</span>
+                    <span className={styles.copyright}>&copy; {currentYear} Webrook Technologies and Consulting</span>
                 </div>
 
                 <div className={styles.right}>

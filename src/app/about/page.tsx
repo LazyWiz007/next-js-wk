@@ -84,7 +84,7 @@ export default function AboutPage() {
                     <FadeIn>
                         <h2 className={styles.sectionHeadline}>The Builder’s Mindset</h2>
                         <p className={styles.bodyText}>
-                            Webrook was founded by someone who builds — not just products, but systems.
+                            Webrook was founded by someone who builds not just products, but systems.
                             Systems require patience. They demand structure. They reward discipline over noise.
                         </p>
                         <p className={styles.bodyText}>
@@ -102,9 +102,12 @@ export default function AboutPage() {
                         whileInView={{ opacity: 1 }}
                         transition={{ duration: 1 }}
                     >
-                        <img
-                            src="/video/about_us.jpeg"
-                            alt="The Builder's Mindset"
+                        <video
+                            src="/video/AI models/webrook_ani.mp4"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                         />
                     </motion.div>
@@ -118,7 +121,7 @@ export default function AboutPage() {
                         <h2 className={styles.sectionHeadline}>What We Believe</h2>
                     </FadeIn>
                     <div style={{ marginTop: '4rem' }}>
-                        {['Process matters more than hype.', 'Longevity beats virality.', 'Quiet systems outperform loud promises.', 'Good design is not decoration — it’s clarity.', 'Technology should adapt to people, not the other way around.'].map((item, index) => {
+                        {['Process matters more than hype.', 'Longevity beats virality.', 'Quiet systems outperform loud promises.', 'Good design is not decoration it’s clarity.', 'Technology should adapt to people, not the other way around.'].map((item, index) => {
                             const colors = ['#EF3636', '#FDB514', '#55BB5D'];
                             const hoverColor = colors[index % colors.length];
                             return (
@@ -148,7 +151,7 @@ export default function AboutPage() {
                         <h2 className={styles.sectionHeadline}>Why the Rook?</h2>
                         <p className={styles.bodyText}>
                             The rook is not the flashiest piece on the board. But it is central. Defensive. Relentless.
-                            It connects. It protects. It changes the outcome — quietly.
+                            It connects. It protects. It changes the outcome quietly.
                         </p>
                     </FadeIn>
                 </div>

@@ -51,13 +51,18 @@ const Icons = {
 
 const NAV_DATA: NavItem[] = [
     {
-        label: 'Intelligence',
+        label: 'AI',
+        href: '/intelligence',
+    },
+    {
+        label: 'Products',
         description: 'Pioneering the future of artificial cognition.',
         overviewLink: '/intelligence',
         children: [
-            { label: 'AI Models', desc: 'State-of-the-art language processing.', icon: Icons.Brain, href: '/intelligence#models' },
-            { label: 'Autonomous Agents', desc: 'Self-governing task execution.', icon: Icons.Bot, href: '/intelligence#agents' },
-            { label: 'Industrial Systems', desc: 'AI for manufacturing & logic.', icon: Icons.Factory, href: '/intelligence#systems' },
+            { label: 'Predictive Diagnostics', desc: 'Healthcare AI pipelines.', icon: Icons.Brain, href: '/case-studies/predictive-diagnostics' },
+            { label: 'AI in Supply Chain', desc: 'Logistics optimization.', icon: Icons.Globe, href: '/case-studies/supply-chain-ai' },
+            { label: 'Autonomous QC', desc: 'Zero-touch defect detection.', icon: Icons.Bot, href: '/case-studies/autonomous-qc' },
+            { label: 'Motorsports Intelligence', desc: 'Telemetry to performance.', icon: Icons.Zap, href: '/case-studies/motorsports-intelligence' },
         ]
     },
     {
@@ -107,15 +112,32 @@ const NAV_DATA: NavItem[] = [
 export default function Navbar() {
     const [activeMenu, setActiveMenu] = useState<string | null>(null);
     const [scrolled, setScrolled] = useState(false);
+    const [hidden, setHidden] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeMobileCategory, setActiveMobileCategory] = useState<string | null>(null);
     const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+    const lastScrollY = useRef(0);
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
+            const currentScrollY = window.scrollY;
+
+            // Determine if scrolled down (for background style)
+            setScrolled(currentScrollY > 20);
+
+            // Determine scroll direction for hiding/showing
+            if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+                // Scrolling DOWN and passed threshold -> Hide
+                setHidden(true);
+            } else {
+                // Scrolling UP -> Show
+                setHidden(false);
+            }
+
+            lastScrollY.current = currentScrollY;
         };
-        window.addEventListener('scroll', handleScroll);
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -150,13 +172,13 @@ export default function Navbar() {
 
     return (
         <header
-            className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}
+            className={`${styles.header} ${scrolled ? styles.scrolled : ''} ${hidden ? styles.headerHidden : ''}`}
         >
             <div className={`container ${styles.navContainer}`}>
                 <div className={styles.logoWrapper}>
                     <Link href="/" className={styles.logo} onClick={() => setMobileMenuOpen(false)}>
                         <Image
-                            src="/logo/webrook-full.png"
+                            src={scrolled ? "/images/webrook_white_logo.png" : "/logo/webrook-full.png"}
                             alt="Webrook"
                             width={140}
                             height={40}
@@ -177,17 +199,26 @@ export default function Navbar() {
                                 onMouseLeave={handleMouseLeave}
                             >
                                 <div className={styles.navLinkWrapper}>
-                                    <button className={`${styles.navLink} ${activeMenu === item.label ? styles.active : ''}`}>
-                                        {item.label}
-                                        <ChevronDownIcon
-                                            className={styles.navArrow}
-                                            style={{
-                                                transform: activeMenu === item.label ? 'rotate(180deg)' : 'rotate(0deg)',
-                                                width: '12px',
-                                                height: '12px'
-                                            }}
-                                        />
-                                    </button>
+                                    {item.children ? (
+                                        <button className={`${styles.navLink} ${activeMenu === item.label ? styles.active : ''}`}>
+                                            {item.label}
+                                            <ChevronDownIcon
+                                                className={styles.navArrow}
+                                                style={{
+                                                    transform: activeMenu === item.label ? 'rotate(180deg)' : 'rotate(0deg)',
+                                                    width: '12px',
+                                                    height: '12px'
+                                                }}
+                                            />
+                                        </button>
+                                    ) : (
+                                        <Link
+                                            href={item.href || '#'}
+                                            className={`${styles.navLink} ${activeMenu === item.label ? styles.active : ''}`}
+                                        >
+                                            {item.label}
+                                        </Link>
+                                    )}
                                 </div>
 
                                 {activeMenu === item.label && item.children && (
@@ -255,7 +286,7 @@ export default function Navbar() {
                     {mobileMenuOpen ? (
                         <XMarkIcon style={{ width: '24px', height: '24px', color: '#1f1f1f' }} />
                     ) : (
-                        <Bars3Icon style={{ width: '24px', height: '24px', color: '#1f1f1f' }} />
+                        <Bars3Icon style={{ width: '24px', height: '24px', color: scrolled ? '#ffffff' : '#1f1f1f' }} />
                     )}
 
                 </button>
@@ -265,24 +296,43 @@ export default function Navbar() {
                     <div className={styles.mobileMenuContent}>
                         {NAV_DATA.map((item) => (
                             <div key={item.label} className={styles.mobileGroup}>
-                                <button
-                                    className={`${styles.mobileGroupHeader} ${activeMobileCategory === item.label ? styles.active : ''}`}
-                                    onClick={() => setActiveMobileCategory(activeMobileCategory === item.label ? null : item.label)}
-                                >
-                                    {item.label}
-                                    <ChevronDownIcon
-                                        className={styles.mobileGroupArrow}
-                                        style={{
-                                            transform: activeMobileCategory === item.label ? 'rotate(180deg)' : 'rotate(0deg)',
-                                            width: '16px',
-                                            height: '16px'
-                                        }}
-                                    />
-                                </button>
+                                {item.children ? (
+                                    <button
+                                        className={`${styles.mobileGroupHeader} ${activeMobileCategory === item.label ? styles.active : ''}`}
+                                        onClick={() => setActiveMobileCategory(activeMobileCategory === item.label ? null : item.label)}
+                                    >
+                                        {item.label}
+                                        <ChevronDownIcon
+                                            className={styles.mobileGroupArrow}
+                                            style={{
+                                                transform: activeMobileCategory === item.label ? 'rotate(180deg)' : 'rotate(0deg)',
+                                                width: '16px',
+                                                height: '16px'
+                                            }}
+                                        />
+                                    </button>
+                                ) : (
+                                    <Link
+                                        href={item.href || '#'}
+                                        className={styles.mobileGroupHeader}
+                                        onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                )}
 
                                 <div
                                     className={`${styles.mobileGroupLinks} ${activeMobileCategory === item.label ? styles.open : ''}`}
                                 >
+                                    {item.overviewLink && (
+                                        <Link
+                                            href={item.overviewLink}
+                                            className={`${styles.mobileLink} ${styles.mobileOverviewLink}`}
+                                            onClick={() => setMobileMenuOpen(false)}
+                                        >
+                                            Overview
+                                        </Link>
+                                    )}
                                     {item.children?.map(child => (
                                         <div key={child.label}>
                                             {child.subChildren ? (

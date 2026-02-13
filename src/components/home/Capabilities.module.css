@@ -1,6 +1,6 @@
 .section {
     padding: 120px 0;
-    background: linear-gradient(to bottom, #fff calc(100% - 120px), #000 0);
+    background: linear-gradient(to bottom, #000000 calc(100% - 120px), #000 0);
 }
 
 .header {
@@ -14,7 +14,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #5f6368;
+    color: #909090;
     margin-bottom: 16px;
     font-family: var(--font-plus-jakarta);
 }
@@ -22,7 +22,7 @@
 .title {
     font-size: 48px;
     font-weight: 500;
-    color: var(--foreground);
+    color: #ffffff;
     letter-spacing: -0.02em;
     line-height: 1.1;
     font-family: var(--font-plus-jakarta);
@@ -215,7 +215,7 @@
 
     .section {
         padding: 40px 0;
-        background: linear-gradient(to bottom, #fff calc(100% - 40px), #000 0);
+        background: #000;
         /* Match dark theme for mobile */
     }
 

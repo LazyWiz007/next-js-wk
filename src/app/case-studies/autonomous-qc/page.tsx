@@ -78,7 +78,7 @@ export default function AutonomousQCPage() {
 
                     <h2 className={styles.sectionTitle}>Why It Matters</h2>
                     <p className={styles.text}>
-                        Automated inspection reduces downtime, improves safety, and enables faster maintenance decisions — critical factors in scaling renewable energy operations efficiently.
+                        Automated inspection reduces downtime, improves safety, and enables faster maintenance decisions critical factors in scaling renewable energy operations efficiently.
                     </p>
 
                     <hr className={styles.divider} />

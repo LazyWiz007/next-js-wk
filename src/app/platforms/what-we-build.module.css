@@ -52,19 +52,21 @@
 
 .title {
     font-family: var(--font-plus-jakarta);
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 1.1;
     color: #202124;
-    margin: 0;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
 }
 
 .subtitle {
     font-family: var(--font-plus-jakarta);
-    font-size: 18px;
-    font-weight: 600;
-    color: #3c4043;
-    margin-top: -12px;
+    font-size: 24px;
+    font-weight: 500;
+    color: #5f6368;
+    margin-bottom: 40px;
+    line-height: 1.4;
 }
 
 .description {

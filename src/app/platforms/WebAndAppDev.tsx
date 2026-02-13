@@ -7,7 +7,7 @@ const DATA = [
         id: 'website',
         label: 'Website Development',
         title: 'Launch-ready,\nperformance-driven digital experiences.',
-        description: 'We build high-impact websites for brands, startups, and large-scale events — engineered for speed, clarity, and conversion.',
+        description: 'We build high-impact websites for brands, startups, and large-scale events engineered for speed, clarity, and conversion.',
         bullets: [
             'Modern UI/UX with clean, minimal design',
             'SEO-first architecture',

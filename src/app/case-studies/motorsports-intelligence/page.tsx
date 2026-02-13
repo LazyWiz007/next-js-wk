@@ -53,7 +53,7 @@ export default function MotorsportsIntelligencePage() {
 
                     <h2 className={styles.sectionTitle}>What We’re Building</h2>
                     <p className={styles.text}>
-                        A performance intelligence system that analyzes test-ride data to provide structured feedback for drivers and race teams. The goal is to augment — and in some cases reduce dependency on — traditional engineering interpretation.
+                        A performance intelligence system that analyzes test-ride data to provide structured feedback for drivers and race teams. The goal is to augment and in some cases reduce dependency on traditional engineering interpretation.
                     </p>
 
                     <h2 className={styles.sectionTitle}>Why It Matters</h2>

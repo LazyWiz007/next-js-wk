@@ -394,7 +394,7 @@
 
     .visualSide {
         height: 300px;
-        order: -1;
+        order: 2;
     }
 
     /* Hide styled accordion on mobile, show carousel */
@@ -428,14 +428,17 @@
 
     .mobileCard {
         min-width: 85vw;
+        max-width: 85vw;
+        /* Prevent expansion beyond viewport width */
         background: #f8f9fa;
-        padding: 32px 60px;
-        /* Increased side padding for arrows */
+        padding: 32px 72px;
+        /* Increased padding to clear arrows */
         border-radius: 16px;
         scroll-snap-align: center;
         flex-shrink: 0;
         position: relative;
         /* Ensure layout context */
+        box-sizing: border-box;
     }
 
     .mobileCardTitle {
@@ -443,12 +446,14 @@
         font-weight: 600;
         margin-bottom: 8px;
         color: #202124;
+        word-wrap: break-word;
     }
 
     .mobileCardDesc {
         font-size: 15px;
         color: #5f6368;
         line-height: 1.5;
+        word-wrap: break-word;
     }
 
     /* Carousel Arrows */

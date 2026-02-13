@@ -1,20 +1,29 @@
+/* Header Styles - Dynamic Theme */
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: var(--header-height);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
+    /* White background initially */
     backdrop-filter: blur(12px);
     z-index: 1000;
     border-bottom: 1px solid transparent;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+/* Smart Navbar Hidden State */
+.headerHidden {
+    transform: translateY(-100%);
 }
 
 .scrolled {
-    background: rgba(255, 255, 255, 0.95);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    background: rgba(0, 0, 0, 0.95);
+    /* Black when scrolled */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    /* Subtle white border */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .navContainer {
@@ -54,7 +63,7 @@
     align-items: center;
 }
 
-/* Navigation Link - Main */
+/* Navigation Link - Main (Default White Header / Black Text) */
 .navLink {
     background: none;
     border: none;
@@ -62,6 +71,7 @@
     font-weight: 500;
     font-size: 15px;
     color: #5f6368;
+    /* Dark text for white background */
     padding: 8px 16px;
     border-radius: 20px;
     cursor: pointer;
@@ -71,16 +81,36 @@
     gap: 6px;
 }
 
+/* Scrolled State (Black Header / White Text) */
+.scrolled .navLink {
+    color: #e0e0e0;
+}
+
 .navArrow {
     transition: transform 0.2s ease;
     width: 10px;
     height: 6px;
+    color: #5f6368;
+    /* Dark arrow for white background */
+}
+
+.scrolled .navArrow {
+    color: #e0e0e0;
+    /* White arrow for black background */
 }
 
 .navLink:hover,
 .navLink.active {
-    color: var(--foreground);
-    background: rgba(0, 0, 0, 0.04);
+    color: #202124;
+    /* Black active text on white */
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.scrolled .navLink:hover,
+.scrolled .navLink.active {
+    color: #ffffff;
+    /* White active text on black */
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Mega Menu Container */
@@ -364,6 +394,12 @@
     font-family: var(--font-plus-jakarta);
     padding: 6px 0;
     display: block;
+}
+
+.mobileOverviewLink {
+    font-weight: 600;
+    color: #1a73e8;
+    margin-bottom: 8px;
 }
 
 .mobileSubHeader {

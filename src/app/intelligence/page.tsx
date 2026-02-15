@@ -98,15 +98,7 @@ const SECTIONS: Section[] = [
     }
 ];
 
-export const metadata = {
-    title: 'Webrook Intelligence | Purpose-Built AI Models & Agents',
-    description: 'We design and deploy AI models tailored to specific industries. From computer vision to autonomous agents, our systems go beyond prediction to action.',
-    openGraph: {
-        title: 'Webrook Intelligence | Purpose-Built AI Models & Agents',
-        description: 'We design and deploy AI models tailored to specific industries. From computer vision to autonomous agents, our systems go beyond prediction to action.',
-        url: 'https://webrook.in/intelligence',
-    },
-};
+
 
 export default function IntelligencePage() {
     // State to track active list item for "How It Works" section

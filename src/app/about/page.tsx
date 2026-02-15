@@ -22,15 +22,7 @@ const FadeIn = ({ children, delay = 0, className = '' }: { children: React.React
     );
 };
 
-export const metadata = {
-    title: 'About Webrook | The Philosophy of AI-First Systems',
-    description: 'Webrook connects software, hardware, and data to automate processes inside industrial environments. We build systems that endure change.',
-    openGraph: {
-        title: 'About Webrook | The Philosophy of AI-First Systems',
-        description: 'Webrook connects software, hardware, and data to automate processes inside industrial environments. We build systems that endure change.',
-        url: 'https://webrook.in/about',
-    },
-};
+
 
 export default function AboutPage() {
     const { scrollYProgress } = useScroll();

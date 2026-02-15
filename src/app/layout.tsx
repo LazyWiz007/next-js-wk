@@ -37,9 +37,45 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Webrook",
+        "url": "https://webrook.in",
+        "logo": "https://webrook.in/logo/webrook-full.png",
+        "sameAs": [
+          "https://www.linkedin.com/company/webrook/",
+          "https://www.instagram.com/webrook.in/"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "",
+          "contactType": "customer service",
+          "email": "hello@webrook.in"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "name": "Webrook",
+        "url": "https://webrook.in",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://webrook.in/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  };
+
   return (
     <html lang="en">
       <body className={`${plusJakarta.variable} font-sans antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <SmoothScroll />
         <Navbar />
         {children}

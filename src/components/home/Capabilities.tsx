@@ -72,9 +72,8 @@ export default function Capabilities() {
 
             <div className={styles.accordionGrid}>
                 {CAPABILITIES.map((item, index) => (
-                    <Link href="/intelligence" className={styles.cardLink}>
+                    <Link href="/intelligence" className={styles.cardLink} key={item.title}>
                         <div
-                            key={item.title}
                             className={styles.card}
                             onMouseEnter={() => handleMouseEnter(index)}
                             onMouseLeave={() => handleMouseLeave(index)}

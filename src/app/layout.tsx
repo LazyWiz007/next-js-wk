@@ -16,8 +16,16 @@ export const metadata: Metadata = {
   title: "Webrook | AI-First Systems Studio",
   description: "Webrook is an AI-first systems studio building applied AI, MCPs, and autonomous agents.",
   icons: {
-    icon: "/logo/webrook-logo-whitebg.png",
+    icon: [
+      { url: '/logo/favicon_io/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/logo/favicon_io/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+    ],
+    shortcut: '/logo/favicon_io/favicon.ico',
+    apple: [
+      { url: '/logo/favicon_io/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
+  manifest: '/logo/favicon_io/site.webmanifest',
 };
 
 import SmoothScroll from "@/components/SmoothScroll";

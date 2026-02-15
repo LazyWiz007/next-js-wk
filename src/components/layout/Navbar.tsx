@@ -179,7 +179,7 @@ export default function Navbar() {
                     <Link href="/" className={styles.logo} onClick={() => setMobileMenuOpen(false)}>
                         <Image
                             src={scrolled ? "/images/webrook_white_logo.png" : "/logo/webrook-full.png"}
-                            alt="Webrook"
+                            alt="Webrook Logo"
                             width={140}
                             height={40}
                             className={styles.logoImage}

@@ -93,7 +93,7 @@ export default function WhatWeBuild() {
                                 <div className={styles.hub}>
                                     <Image
                                         src="/logo/webrook-logo.png"
-                                        alt="Webrook"
+                                        alt="Webrook Logo"
                                         width={48}
                                         height={48}
                                         className={styles.hubLogo}

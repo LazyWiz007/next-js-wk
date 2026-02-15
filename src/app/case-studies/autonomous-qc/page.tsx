@@ -29,7 +29,7 @@ export default function AutonomousQCPage() {
                         <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #f1f3f4' }}>
                             <Image
                                 src="/images/droneqc.jpg"
-                                alt="Drone Inspection"
+                                alt="Drone Inspection of Solar Farm"
                                 width={600}
                                 height={400}
                                 style={{ width: '100%', height: 'auto', display: 'block' }}
@@ -48,7 +48,7 @@ export default function AutonomousQCPage() {
                             {/* Australia */}
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', background: '#f8f9fa', borderRadius: '12px' }}>
                                 <div style={{ width: '32px', height: '32px', position: 'relative', flexShrink: 0 }}>
-                                    <Image src="/images/flag_australia.png" alt="Australia" fill style={{ objectFit: 'contain' }} />
+                                    <Image src="/images/flag_australia.png" alt="Australian Flag" fill style={{ objectFit: 'contain' }} />
                                 </div>
                                 <span style={{ fontFamily: 'var(--font-plus-jakarta)', fontWeight: 500, color: '#202124' }}>Australia</span>
                             </div>
@@ -56,7 +56,7 @@ export default function AutonomousQCPage() {
                             {/* New Zealand */}
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', background: '#f8f9fa', borderRadius: '12px' }}>
                                 <div style={{ width: '32px', height: '32px', position: 'relative', flexShrink: 0 }}>
-                                    <Image src="/images/flag_new_zealand.png" alt="New Zealand" fill style={{ objectFit: 'contain' }} />
+                                    <Image src="/images/flag_new_zealand.png" alt="New Zealand Flag" fill style={{ objectFit: 'contain' }} />
                                 </div>
                                 <span style={{ fontFamily: 'var(--font-plus-jakarta)', fontWeight: 500, color: '#202124' }}>New Zealand</span>
                             </div>
@@ -64,7 +64,7 @@ export default function AutonomousQCPage() {
                             {/* South Africa */}
                             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '16px', background: '#f8f9fa', borderRadius: '12px' }}>
                                 <div style={{ width: '32px', height: '32px', position: 'relative', flexShrink: 0 }}>
-                                    <Image src="/images/flag_south_africa.png" alt="South Africa" fill style={{ objectFit: 'contain' }} />
+                                    <Image src="/images/flag_south_africa.png" alt="South African Flag" fill style={{ objectFit: 'contain' }} />
                                 </div>
                                 <span style={{ fontFamily: 'var(--font-plus-jakarta)', fontWeight: 500, color: '#202124' }}>South Africa</span>
                             </div>

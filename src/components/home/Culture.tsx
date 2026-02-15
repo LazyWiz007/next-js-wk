@@ -8,7 +8,7 @@ export default function Culture() {
             <div className={styles.background}>
                 <Image
                     src="/images/webrook_tfn.jpg"
-                    alt="Cyclists in mist"
+                    alt="Cyclists in mist representing endurance"
                     fill
                     className={styles.image}
                     quality={90}

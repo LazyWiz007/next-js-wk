@@ -60,7 +60,7 @@ export default function PredictiveDiagnosticsPage() {
                     <div className={styles.logoSection}>
                         <Image
                             src="/images/Logo_of_UNICEF.png"
-                            alt="UNICEF Logo"
+                            alt="UNICEF Logo - Partner"
                             width={200}
                             height={80}
                             className={styles.unicefLogo}

@@ -18,7 +18,7 @@ export default function SupplyChainAIPage() {
                         <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #f1f3f4' }}>
                             <Image
                                 src="/images/cabnova.png"
-                                alt="Cabnova Interface 1"
+                                alt="Cabnova Supply Chain Interface - Route Optimization"
                                 width={600}
                                 height={400}
                                 style={{ width: '100%', height: 'auto', display: 'block' }}
@@ -27,7 +27,7 @@ export default function SupplyChainAIPage() {
                         <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #f1f3f4' }}>
                             <Image
                                 src="/images/cabnova2.png"
-                                alt="Cabnova Interface 2"
+                                alt="Cabnova Supply Chain Interface - Analytics Dashboard"
                                 width={600}
                                 height={400}
                                 style={{ width: '100%', height: 'auto', display: 'block' }}

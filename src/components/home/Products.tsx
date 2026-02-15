@@ -40,7 +40,7 @@ export default function Products() {
                         <div className={styles.visualInner}>
                             <Image
                                 src="/images/taprook/Business_Card_Mockup.png"
-                                alt="Taprook Business Card"
+                                alt="Taprook Business Card Mockup"
                                 width={500}
                                 height={300}
                                 style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '12px' }}

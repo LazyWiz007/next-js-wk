@@ -15,6 +15,9 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Webrook | AI-First Systems Studio",
   description: "Webrook is an AI-first systems studio building applied AI, MCPs, and autonomous agents.",
+  icons: {
+    icon: "/logo/webrook-logo-whitebg.png",
+  },
 };
 
 import SmoothScroll from "@/components/SmoothScroll";

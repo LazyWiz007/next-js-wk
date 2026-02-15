@@ -18,7 +18,7 @@ export default function MotorsportsIntelligencePage() {
                         <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #f1f3f4' }}>
                             <Image
                                 src="/images/motorsportsAI.jpg"
-                                alt="Motorsports AI Analysis"
+                                alt="Motorsports Telemetry Analysis Dashboard"
                                 width={600}
                                 height={400}
                                 style={{ width: '100%', height: 'auto', display: 'block' }}
@@ -27,7 +27,7 @@ export default function MotorsportsIntelligencePage() {
                         <div style={{ borderRadius: '16px', overflow: 'hidden', border: '1px solid #f1f3f4' }}>
                             <Image
                                 src="/images/webrook AI.webp"
-                                alt="Webrook AI Interface"
+                                alt="Webrook AI Performance Interface"
                                 width={600}
                                 height={400}
                                 style={{ width: '100%', height: 'auto', display: 'block' }}

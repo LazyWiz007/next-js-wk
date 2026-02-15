@@ -118,7 +118,7 @@ export default function CareersPage() {
                             </ul>
                         </div>
                         <div className={styles.jobAction}>
-                            <a href="mailto:careers@webrook.io?subject=Application: Graphic Designer" className={styles.applyButton}>
+                            <a href="mailto:hello@webrook.in?subject=Application: Graphic Designer" className={styles.applyButton}>
                                 Apply Now
                             </a>
                         </div>

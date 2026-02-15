@@ -109,8 +109,8 @@ export default function ContactPage() {
                         <div className={styles.contactDetail}>
                             <span className={styles.label}>Connect</span>
                             <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '2rem' }}>
-                                <a href="#" className={styles.value}>LinkedIn</a>
-                                <a href="#" className={styles.value}>Twitter</a>
+                                <a href="https://www.linkedin.com/company/webrook/" target="_blank" rel="noopener noreferrer" className={styles.value}>LinkedIn</a>
+                                <a href="https://www.instagram.com/webrook.in/?hl=en" target="_blank" rel="noopener noreferrer" className={styles.value}>Instagram</a>
                             </div>
                         </div>
                     </FadeIn>

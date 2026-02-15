@@ -7,8 +7,13 @@ import WebAndAppDev from './WebAndAppDev';
 import PlatformsCTA from './PlatformsCTA';
 
 export const metadata = {
-    title: 'Platforms | Webrook',
-    description: 'Infrastructure that scales with your ambition.',
+    title: 'Webrook Platforms | Enterprise Core & Global Network',
+    description: 'Infrastructure that scales with your ambition. Discover our headless commerce integrations, ERP solutions, and global network capabilities.',
+    openGraph: {
+        title: 'Webrook Platforms | Enterprise Core & Global Network',
+        description: 'Infrastructure that scales with your ambition. Discover our headless commerce integrations, ERP solutions, and global network capabilities.',
+        url: 'https://webrook.in/platforms',
+    },
 };
 
 export default function PlatformsPage() {

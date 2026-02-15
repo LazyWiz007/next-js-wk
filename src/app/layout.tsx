@@ -26,6 +26,29 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/logo/favicon_io/site.webmanifest',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://webrook.in',
+    siteName: 'Webrook',
+    title: 'Webrook | AI-First Systems Studio',
+    description: 'Webrook is an AI-first systems studio building applied AI, MCPs, and autonomous agents.',
+    images: [
+      {
+        url: 'https://webrook.in/logo/webrook-full.png',
+        width: 1200,
+        height: 630,
+        alt: 'Webrook AI Systems',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Webrook | AI-First Systems Studio',
+    description: 'Webrook is an AI-first systems studio building applied AI, MCPs, and autonomous agents.',
+    images: ['https://webrook.in/logo/webrook-full.png'],
+  },
+  keywords: ['AI', 'Autonomous Agents', 'Industrial AI', 'Systems Studio', 'Webrook', 'Generative AI', 'Enterprise AI'],
 };
 
 import SmoothScroll from "@/components/SmoothScroll";

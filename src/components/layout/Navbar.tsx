@@ -281,15 +281,19 @@ export default function Navbar() {
                     <Link href="/contact" className={styles.contactLink}>Contact</Link>
                 </div>
 
-                {/* Mobile Menu Toggle */}
-                <button className={styles.mobileToggle} onClick={toggleMobileMenu} aria-label="Toggle menu">
-                    {mobileMenuOpen ? (
-                        <XMarkIcon style={{ width: '24px', height: '24px', color: '#1f1f1f' }} />
-                    ) : (
-                        <Bars3Icon style={{ width: '24px', height: '24px', color: scrolled ? '#ffffff' : '#1f1f1f' }} />
-                    )}
-
-                </button>
+                {/* Mobile Actions (Contact + Toggle) */}
+                <div className={styles.mobileActions}>
+                    <Link href="/contact" className={styles.mobileContactBtn}>
+                        Contact
+                    </Link>
+                    <button className={styles.mobileToggle} onClick={toggleMobileMenu} aria-label="Toggle menu">
+                        {mobileMenuOpen ? (
+                            <XMarkIcon style={{ width: '24px', height: '24px', color: '#1f1f1f' }} />
+                        ) : (
+                            <Bars3Icon style={{ width: '24px', height: '24px', color: scrolled ? '#ffffff' : '#1f1f1f' }} />
+                        )}
+                    </button>
+                </div>
 
                 {/* Mobile Menu Overlay */}
                 <div className={`${styles.mobileMenuOverlay} ${mobileMenuOpen ? styles.open : ''}`}>

@@ -301,6 +301,32 @@
 
 /* --- MOBILE STYLES --- */
 
+.mobileActions {
+    display: none;
+    /* Hidden on desktop */
+    align-items: center;
+    gap: 16px;
+    z-index: 1002;
+}
+
+.mobileContactBtn {
+    font-family: var(--font-plus-jakarta);
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    background: #1a73e8;
+    /* Webrook Blue */
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.mobileContactBtn:hover {
+    background: #1557b0;
+}
+
 /* Initially hidden components */
 .mobileToggle {
     display: none;
@@ -431,9 +457,15 @@
         /* Hide Desktop Nav */
     }
 
+    .mobileActions {
+        display: flex;
+        /* Show on mobile */
+    }
+
     .mobileToggle {
         display: block;
-        /* Show Toggle */
+        padding: 0;
+        /* Remove padding to align better */
     }
 
     .logoWrapper {

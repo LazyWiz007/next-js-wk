@@ -72,8 +72,7 @@ export default function Hero() {
             <div className={styles.content}>
                 <div className={styles.textWrapper}>
                     <h1 className="headline-hero fade-in-up" style={{ animationDelay: '0.2s', color: 'white' }}>
-                        <span style={{ position: 'relative', display: 'inline-block' }}>
-                            <span className={cursorStyles.cursor}></span>
+                        <span style={{ position: 'relative', display: 'inline-block', whiteSpace: 'nowrap' }}>
                             {isDeleting ? (
                                 <>
                                     <span>{text.substring(0, selectionIndex)}</span>
@@ -84,6 +83,7 @@ export default function Hero() {
                                     {text}
                                 </>
                             )}
+                            <span className={cursorStyles.cursor}></span>
                             {suffix}
                         </span> for the next era.
                     </h1>

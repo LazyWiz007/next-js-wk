@@ -64,6 +64,7 @@ export default function Hero() {
                 muted
                 playsInline
             >
+                <source src="/video/mobile_bg.mp4" type="video/mp4" media="(max-width: 768px)" />
                 <source src="/video/webrook_bg.mp4" type="video/mp4" />
             </video>
             <div className={styles.gradientOverlay}></div>

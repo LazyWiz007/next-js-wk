@@ -141,6 +141,6 @@
     }
 
     .content :global(.headline-hero) {
-        font-size: 32px;
+        font-size: 22px;
     }
 }

@@ -42,7 +42,7 @@ export default function AutonomousQCPage() {
                     {/* Exporting Regions */}
                     <div style={{ marginBottom: '60px' }}>
                         <span style={{ fontFamily: 'var(--font-plus-jakarta)', fontWeight: 600, color: '#5f6368', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '24px' }}>
-                            Exporting To
+                            Exporting to
                         </span>
                         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '24px' }}>
                             {/* Australia */}
@@ -71,19 +71,19 @@ export default function AutonomousQCPage() {
                         </div>
                     </div>
 
-                    <h2 className={styles.sectionTitle}>What We’re Building</h2>
+                    <h2 className={styles.sectionTitle}>What we’re building</h2>
                     <p className={styles.text}>
                         An AI-enabled inspection system that analyzes aerial imagery to identify and assess solar panel damage. The system is designed to operate with minimal human intervention while delivering consistent, actionable insights.
                     </p>
 
-                    <h2 className={styles.sectionTitle}>Why It Matters</h2>
+                    <h2 className={styles.sectionTitle}>Why it matters</h2>
                     <p className={styles.text}>
                         Automated inspection reduces downtime, improves safety, and enables faster maintenance decisions critical factors in scaling renewable energy operations efficiently.
                     </p>
 
                     <hr className={styles.divider} />
 
-                    <h2 className={styles.sectionTitle}>Current Status</h2>
+                    <h2 className={styles.sectionTitle}>Current status</h2>
                     <ul className={styles.statusList}>
                         <li className={styles.statusItem}>Functional MVP demonstrated using drone imagery</li>
                         <li className={styles.statusItem}>Focused on improving robustness across varying image conditions</li>

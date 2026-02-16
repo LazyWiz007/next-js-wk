@@ -10,8 +10,8 @@ export default function SupplyChainAIPage() {
             {/* Hero Section */}
             <section className={styles.hero}>
                 <div className={styles.container}>
-                    <span className={styles.domain}>Supply Chain · Logistics Intelligence</span>
-                    <h1 className={styles.title}>AI in Supply Chain</h1>
+                    <span className={styles.domain}>Supply chain · Logistics intelligence</span>
+                    <h1 className={styles.title}>AI in supply chain</h1>
 
                     {/* Hero Images - Side by Side or Stacked based on preference. Using a grid here. */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '40px', marginTop: '24px' }}>
@@ -51,19 +51,19 @@ export default function SupplyChainAIPage() {
 
                     <hr className={styles.divider} />
 
-                    <h2 className={styles.sectionTitle}>What We’re Building</h2>
+                    <h2 className={styles.sectionTitle}>What we’re building</h2>
                     <p className={styles.text}>
                         Supply Chain AI is an AI-powered optimization platform designed to assist logistics operations by continuously analyzing movement, constraints, and operational variables to improve routing and planning decisions.
                     </p>
 
-                    <h2 className={styles.sectionTitle}>Why It Matters</h2>
+                    <h2 className={styles.sectionTitle}>Why it matters</h2>
                     <p className={styles.text}>
                         Even small inefficiencies in logistics compound into large operational costs. Intelligent optimization can reduce delays, lower costs, and improve predictability especially in fast-moving or high-volume environments.
                     </p>
 
                     <hr className={styles.divider} />
 
-                    <h2 className={styles.sectionTitle}>Current Status</h2>
+                    <h2 className={styles.sectionTitle}>Current status</h2>
                     <ul className={styles.statusList}>
                         <li className={styles.statusItem}>Core intelligence models under active development</li>
                         <li className={styles.statusItem}>Focused on adaptability rather than fixed-rule optimization</li>

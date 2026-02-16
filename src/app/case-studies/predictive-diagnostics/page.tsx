@@ -10,10 +10,10 @@ export default function PredictiveDiagnosticsPage() {
             {/* Hero Section */}
             <section className={styles.hero}>
                 <div className={styles.container}>
-                    <span className={styles.domain}>Public Health · Healthcare AI</span>
-                    <h1 className={styles.title}>Predictive Diagnostics</h1>
+                    <span className={styles.domain}>Public health · Healthcare AI</span>
+                    <h1 className={styles.title}>Predictive diagnostics</h1>
                     <div className={styles.collaboration}>
-                        Collaboration: UNICEF & Partner Hospitals
+                        Collaboration: UNICEF & partner hospitals
                     </div>
                     <Link href="/contact" className={styles.ctaButton}>
                         Request demo <span>→</span>
@@ -31,19 +31,19 @@ export default function PredictiveDiagnosticsPage() {
 
                     <hr className={styles.divider} />
 
-                    <h2 className={styles.sectionTitle}>What We’re Building</h2>
+                    <h2 className={styles.sectionTitle}>What we’re building</h2>
                     <p className={styles.text}>
                         We are developing an AI-driven diagnostic system that can estimate critical newborn health indicators such as weight and key physical parameters using a single image. The system is designed to work in low-resource environments without requiring specialized medical equipment.
                     </p>
 
-                    <h2 className={styles.sectionTitle}>Why It Matters</h2>
+                    <h2 className={styles.sectionTitle}>Why it matters</h2>
                     <p className={styles.text}>
                         Early detection of health risks in newborns can significantly improve clinical outcomes. By enabling hospitals and healthcare workers to capture essential data quickly, this solution has the potential to strengthen public health infrastructure at scale.
                     </p>
 
                     <hr className={styles.divider} />
 
-                    <h2 className={styles.sectionTitle}>Current Status</h2>
+                    <h2 className={styles.sectionTitle}>Current status</h2>
                     <ul className={styles.statusList}>
                         <li className={styles.statusItem}>Prediction accuracy exceeding 99% in controlled evaluations</li>
                         <li className={styles.statusItem}>Actively improving the system in collaboration with hospitals and UNICEF</li>

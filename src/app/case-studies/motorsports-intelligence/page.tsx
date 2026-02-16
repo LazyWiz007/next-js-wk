@@ -10,8 +10,8 @@ export default function MotorsportsIntelligencePage() {
             {/* Hero Section */}
             <section className={styles.hero}>
                 <div className={styles.container}>
-                    <span className={styles.domain}>Sports Tech · Performance Analytics</span>
-                    <h1 className={styles.title}>Motorsports Intelligence</h1>
+                    <span className={styles.domain}>Sports tech · Performance analytics</span>
+                    <h1 className={styles.title}>Motorsports intelligence</h1>
 
                     {/* Hero Images Grid */}
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px', marginBottom: '40px', marginTop: '24px' }}>
@@ -51,19 +51,19 @@ export default function MotorsportsIntelligencePage() {
 
                     <hr className={styles.divider} />
 
-                    <h2 className={styles.sectionTitle}>What We’re Building</h2>
+                    <h2 className={styles.sectionTitle}>What we’re building</h2>
                     <p className={styles.text}>
                         A performance intelligence system that analyzes test-ride data to provide structured feedback for drivers and race teams. The goal is to augment and in some cases reduce dependency on traditional engineering interpretation.
                     </p>
 
-                    <h2 className={styles.sectionTitle}>Why It Matters</h2>
+                    <h2 className={styles.sectionTitle}>Why it matters</h2>
                     <p className={styles.text}>
                         Faster feedback loops allow drivers to improve performance more efficiently, while teams gain clearer insight into performance variables without relying solely on manual analysis.
                     </p>
 
                     <hr className={styles.divider} />
 
-                    <h2 className={styles.sectionTitle}>Current Status</h2>
+                    <h2 className={styles.sectionTitle}>Current status</h2>
                     <ul className={styles.statusList}>
                         <li className={styles.statusItem}>Actively tested with race managers and drivers</li>
                         <li className={styles.statusItem}>Focused on driver feedback and performance patterns</li>

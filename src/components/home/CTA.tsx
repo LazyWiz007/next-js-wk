@@ -7,7 +7,7 @@ export default function CTA() {
             <div className="container">
                 <div className={styles.content}>
                     <h2 className={styles.headline}>
-                        If you’re building something that matters <br />
+                        If you’re building something <br />
                         <span className={styles.highlight}>let’s talk.</span>
                     </h2>
                     <div className={styles.actions}>

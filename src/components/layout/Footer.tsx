@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styles from './Footer.module.css';
 
 const FOOTER_LINKS = [
-    { label: 'Insights', href: '/insights' },
+
     { label: 'Careers', href: '/careers' },
     { label: 'Contact', href: '/contact' },
     { label: 'Sitemap', href: '/sitemap.xml' },

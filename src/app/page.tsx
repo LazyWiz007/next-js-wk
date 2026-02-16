@@ -13,10 +13,10 @@ export default function Home() {
     <main className={styles.main}>
       <Hero />
       <Capabilities />
+      <Impact />
       <ProblemStatements />
       <AIInAction />
       <Products />
-      <Impact />
       <Culture />
       <CTA />
     </main>

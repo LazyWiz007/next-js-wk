@@ -13,8 +13,24 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://webrook.in'),
   title: "Webrook | AI-First Systems Studio",
   description: "Webrook is an AI-first systems studio building applied AI, MCPs, and autonomous agents.",
+  applicationName: 'Webrook',
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: [
       { url: '/logo/favicon_io/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -48,7 +64,7 @@ export const metadata: Metadata = {
     description: 'Webrook is an AI-first systems studio building applied AI, MCPs, and autonomous agents.',
     images: ['https://webrook.in/logo/webrook-full.png'],
   },
-  keywords: ['AI', 'Autonomous Agents', 'Industrial AI', 'Systems Studio', 'Webrook', 'Generative AI', 'Enterprise AI'],
+  keywords: ['Webrook', 'Webrook.in', 'Webrook AI', 'Webrook India', 'AI', 'Autonomous Agents', 'Industrial AI', 'Systems Studio', 'Generative AI', 'Enterprise AI'],
 };
 
 import SmoothScroll from "@/components/SmoothScroll";

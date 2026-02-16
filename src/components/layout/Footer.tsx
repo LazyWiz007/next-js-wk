@@ -5,6 +5,7 @@ const FOOTER_LINKS = [
     { label: 'Insights', href: '/insights' },
     { label: 'Careers', href: '/careers' },
     { label: 'Contact', href: '/contact' },
+    { label: 'Sitemap', href: '/sitemap.xml' },
 ];
 
 export default function Footer() {

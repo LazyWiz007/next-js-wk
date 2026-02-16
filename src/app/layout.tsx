@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     description: 'Webrook is an AI-first systems studio building applied AI, MCPs, and autonomous agents.',
     images: [
       {
-        url: 'https://webrook.in/logo/webrook-full.png',
+        url: 'https://webrook.in/logo/webrook-logo-whitebg.png',
         width: 1200,
         height: 630,
         alt: 'Webrook AI Systems',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Webrook | AI-First Systems Studio',
     description: 'Webrook is an AI-first systems studio building applied AI, MCPs, and autonomous agents.',
-    images: ['https://webrook.in/logo/webrook-full.png'],
+    images: ['https://webrook.in/logo/webrook-logo-whitebg.png'],
   },
   keywords: ['Webrook', 'Webrook.in', 'Webrook AI', 'Webrook India', 'AI', 'Autonomous Agents', 'Industrial AI', 'Systems Studio', 'Generative AI', 'Enterprise AI'],
 };

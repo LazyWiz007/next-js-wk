@@ -36,7 +36,7 @@ export default function MotorsportsIntelligencePage() {
                     </div>
 
                     <Link href="/contact" className={styles.ctaButton}>
-                        Talk to us about pilots and collaborations <span>→</span>
+                        Request demo<span>→</span>
                     </Link>
                 </div>
             </section>
@@ -72,7 +72,7 @@ export default function MotorsportsIntelligencePage() {
 
                     <div style={{ marginTop: '60px' }}>
                         <Link href="/contact" className={styles.ctaButton}>
-                            Talk to us about pilots and collaborations <span>→</span>
+                            Request demo <span>→</span>
                         </Link>
                     </div>
                 </section>

@@ -92,7 +92,7 @@ export default function AutonomousQCPage() {
 
                     <div style={{ marginTop: '60px' }}>
                         <Link href="/contact" className={styles.ctaButton}>
-                            Request access to a demo <span>→</span>
+                            Request demo <span>→</span>
                         </Link>
                     </div>
                 </section>

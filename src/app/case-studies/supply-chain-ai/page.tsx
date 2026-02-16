@@ -36,7 +36,7 @@ export default function SupplyChainAIPage() {
                     </div>
 
                     <Link href="/contact" className={styles.ctaButton}>
-                        Contact us to explore potential applications <span>→</span>
+                        Request demo <span>→</span>
                     </Link>
                 </div>
             </section>
@@ -72,7 +72,7 @@ export default function SupplyChainAIPage() {
 
                     <div style={{ marginTop: '60px' }}>
                         <Link href="/contact" className={styles.ctaButton}>
-                            Contact us to explore potential applications <span>→</span>
+                            Request demo <span>→</span>
                         </Link>
                     </div>
                 </section>

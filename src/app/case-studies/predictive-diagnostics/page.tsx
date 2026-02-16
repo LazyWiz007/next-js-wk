@@ -16,7 +16,7 @@ export default function PredictiveDiagnosticsPage() {
                         Collaboration: UNICEF & Partner Hospitals
                     </div>
                     <Link href="/contact" className={styles.ctaButton}>
-                        Request a demo to learn more <span>→</span>
+                        Request demo <span>→</span>
                     </Link>
                 </div>
             </section>
@@ -52,7 +52,7 @@ export default function PredictiveDiagnosticsPage() {
 
                     <div style={{ marginTop: '60px' }}>
                         <Link href="/contact" className={styles.ctaButton}>
-                            Request a demo to learn more <span>→</span>
+                            Request demo <span>→</span>
                         </Link>
                     </div>
 

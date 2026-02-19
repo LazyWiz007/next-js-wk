@@ -398,6 +398,7 @@ export default function AIInAction() {
                             title={item.title}
                             outcome={item.outcome}
                             actionLabel={item.actionLabel}
+                            ariaLabel={`Read case study: ${item.title}`}
                             href={(item as any).href}
                             isActive={hoveredIndex === index || (isMobile && activeSlide === index)}
                             onMouseEnter={() => setHoveredIndex(index)}

@@ -9,6 +9,7 @@ interface ParticleCardProps {
     title: string;
     outcome: string;
     actionLabel?: string;
+    ariaLabel?: string;
     href?: string;
     onMouseEnter: () => void;
     onMouseLeave: () => void;
@@ -16,7 +17,7 @@ interface ParticleCardProps {
 }
 
 const ParticleCard = forwardRef<HTMLDivElement, ParticleCardProps>(
-    ({ category, title, outcome, actionLabel = "Explore", href, onMouseEnter, onMouseLeave, isActive }, ref) => {
+    ({ category, title, outcome, actionLabel = "Explore", ariaLabel, href, onMouseEnter, onMouseLeave, isActive }, ref) => {
         return (
             <div
                 className={styles.card}
@@ -32,7 +33,11 @@ const ParticleCard = forwardRef<HTMLDivElement, ParticleCardProps>(
                     </p>
 
                     {href ? (
-                        <Link href={href} className={`${styles.action} ${isActive ? styles.actionVisible : ''}`}>
+                        <Link
+                            href={href}
+                            className={`${styles.action} ${isActive ? styles.actionVisible : ''}`}
+                            aria-label={ariaLabel || `Explore ${title}`}
+                        >
                             {actionLabel}
                         </Link>
                     ) : (

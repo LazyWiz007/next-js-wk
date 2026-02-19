@@ -113,7 +113,12 @@ export default function Capabilities() {
 
             <div className={styles.accordionGrid}>
                 {CAPABILITIES.map((item, index) => (
-                    <Link href="/intelligence" className={styles.cardLink} key={item.title}>
+                    <Link
+                        href="/intelligence"
+                        className={styles.cardLink}
+                        key={item.title}
+                        aria-label={`Explore ${item.title}`}
+                    >
                         <div
                             className={styles.card}
                             onMouseEnter={() => handleMouseEnter(index)}
@@ -156,7 +161,12 @@ export default function Capabilities() {
             <div className={styles.mobileCarouselWrapper}>
                 <div className={styles.mobileGrid} ref={mobileContainerRef}>
                     {CAPABILITIES.map((item, index) => (
-                        <Link href="/intelligence" key={item.title} className={styles.mobileCardLink}>
+                        <Link
+                            href="/intelligence"
+                            key={item.title}
+                            className={styles.mobileCardLink}
+                            aria-label={`Explore ${item.title}`}
+                        >
                             <div className={styles.mobileCard}>
                                 <div className={styles.mobileCardBackground}>
                                     <video

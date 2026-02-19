@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRightIcon, ArrowLeftIcon, ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 import styles from './Capabilities.module.css';
@@ -28,11 +28,52 @@ const CAPABILITIES = [
     },
 ];
 
-
-
 export default function Capabilities() {
     const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+    const mobileVideoRefs = useRef<(HTMLVideoElement | null)[]>([]);
     const mobileContainerRef = useRef<HTMLDivElement>(null);
+    const [visibleVideos, setVisibleVideos] = useState<boolean[]>(new Array(CAPABILITIES.length).fill(false));
+
+    // Desktop: Lazy load on hover/interaction is already kind of handled by mouseEnter, 
+    // but we want to avoid downloading even metadata until close.
+    // Actually, for desktop cards, let's keep them lightweight.
+
+    // Mobile: AutoPlay only when in view
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const index = Number(entry.target.getAttribute('data-index'));
+                    if (!isNaN(index)) {
+                        setVisibleVideos(prev => {
+                            const newState = [...prev];
+                            newState[index] = true;
+                            return newState;
+                        });
+
+                        // Play if it's a mobile video in view
+                        const video = mobileVideoRefs.current[index];
+                        if (video) {
+                            video.play().catch(() => { });
+                        }
+                    }
+                } else {
+                    const index = Number(entry.target.getAttribute('data-index'));
+                    const video = mobileVideoRefs.current[index];
+                    if (video) {
+                        video.pause();
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        mobileVideoRefs.current.forEach(video => {
+            if (video) observer.observe(video);
+        });
+
+        return () => observer.disconnect();
+    }, []);
+
 
     const handleMouseEnter = (index: number) => {
         const video = videoRefs.current[index];
@@ -85,7 +126,8 @@ export default function Capabilities() {
                                     muted
                                     loop
                                     playsInline
-                                    preload="metadata" // Will load the first frame as poster
+                                    preload="none" // STRICTLY NONE
+                                    poster="/video/poster.jpg" // Use a placeholder to avoid empty box if needed, or just CSS bg
                                 >
                                     <source src={item.video} type="video/mp4" />
                                 </video>
@@ -118,12 +160,18 @@ export default function Capabilities() {
                             <div className={styles.mobileCard}>
                                 <div className={styles.mobileCardBackground}>
                                     <video
+                                        ref={el => { mobileVideoRefs.current[index] = el }}
+                                        data-index={index}
                                         className={styles.mobileVideo}
-                                        autoPlay
                                         muted
                                         loop
                                         playsInline
+                                        preload="none"
                                     >
+                                        {/* Only render source if visible to trigger download? 
+                                            Or use preload="none" and play() triggers load.
+                                            IntersectionObserver above calls play(). 
+                                        */}
                                         <source src={item.video} type="video/mp4" />
                                     </video>
                                     <div className={styles.mobileOverlay} />

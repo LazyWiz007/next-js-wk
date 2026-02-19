@@ -73,7 +73,7 @@ export default function Hero() {
 
             <div className={styles.content}>
                 <div className={styles.textWrapper}>
-                    <h1 className="headline-hero fade-in-up" style={{ animationDelay: '0.2s', color: 'white' }}>
+                    <h1 className="headline-hero fade-in-up" style={{ animationDelay: '0s', color: 'white' }}>
                         <span style={{ position: 'relative', display: 'inline-block', whiteSpace: 'nowrap' }}>
                             {isDeleting ? (
                                 <>

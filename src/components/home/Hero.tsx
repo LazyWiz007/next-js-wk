@@ -63,9 +63,11 @@ export default function Hero() {
                 loop
                 muted
                 playsInline
+                preload="none"
+                poster="/video/poster.jpg"
             >
-                <source src="/video/mobile_bg.mp4" type="video/mp4" media="(max-width: 768px)" />
-                <source src="/video/webrook_bg.mp4" type="video/mp4" />
+                <source src="/video/mobile_bg2.mp4" type="video/mp4" media="(max-width: 768px)" />
+                <source src="/video/webrook-demko.mp4" type="video/mp4" />
             </video>
             <div className={styles.gradientOverlay}></div>
 

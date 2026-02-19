@@ -6,13 +6,13 @@ export default function Culture() {
     return (
         <section className={styles.section}>
             <div className={styles.background}>
-                <Image
-                    src="/images/webrook_tfn.jpg"
-                    alt="Cyclists in mist representing endurance"
-                    fill
-                    className={styles.image}
-                    quality={90}
-                    priority
+                src="/images/webrook_tfn.jpg"
+                alt="Cyclists in mist representing endurance"
+                fill
+                className={styles.image}
+                quality={80}
+                priority
+                sizes="100vw"
                 />
                 <div className={styles.overlay} />
             </div>
